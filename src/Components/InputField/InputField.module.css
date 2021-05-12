@@ -1,0 +1,10 @@
+
+.inputField {
+    font-family: 'Zen Dots', cursive;
+    height: 35px;
+    width: 200px;
+    border-radius: 20px;
+    margin: 10px;
+    display: flex;
+    text-align: center;
+}

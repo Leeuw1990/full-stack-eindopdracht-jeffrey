@@ -1,0 +1,86 @@
+.productForm {
+    border: solid #F4ECE5;
+    border-radius: 50px;
+    height: 600px;
+    width: 315px;
+    background-color: hsl(0, 0%, 87%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.uploadButtonStyle {
+    font-family: 'Zen Dots', cursive;
+    display: flex;
+    width: 200px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #707070;
+    color: #F4ECE5;
+    align-items: center;
+    justify-content: center;
+}
+
+/*.styleItem {*/
+/*    float: left;*/
+/*    padding-left: 8px;*/
+/*    padding-right: 8px;*/
+/*    width: calc(25% - 16px);*/
+/*}*/
+.content {
+    /*padding: 8px 12px;*/
+    float: left;
+    height: 95px;
+    width: 95px;
+    margin: 5px;
+}
+
+.picSize {
+    height: 95px;
+    width: 95px;
+    position: absolute;
+    z-index: 1;
+
+}
+
+
+.StyledContainer {
+    /*border: solid green;*/
+    display: inline-block;
+    background-color: #ddd;
+    /*margin-left: 8px;*/
+    /*margin-right: 8px;*/
+    white-space: nowrap;
+    height: 500px;
+    width: 315px;
+}
+/*.StyledContainer:after {*/
+/*     content: "";*/
+/*     clear: both;*/
+/*     display: table;*/
+/* }*/
+
+.container {
+    /*border: solid red;*/
+    height: 500px;
+    width: 315px;
+}
+
+.handle {
+    display: flex;
+    width: 95px;
+    height: 40px;
+    background-color: transparent;
+    overflow: hidden;
+    cursor: grab;
+    position: absolute;
+    z-index: 2;
+}
+
+.resize {
+    height: 50px;
+    width: 50px;
+    
+}
+

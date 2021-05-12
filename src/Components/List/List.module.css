@@ -1,0 +1,17 @@
+.icon {
+    display: flex;
+    width: 250px;
+    height: 50px;
+    border: solid #707070;
+    border-radius: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px;
+    background-color: #707070;
+    color: #F4ECE5;
+
+
+
+}
+
