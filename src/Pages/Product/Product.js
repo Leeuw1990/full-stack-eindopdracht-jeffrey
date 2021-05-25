@@ -1,13 +1,20 @@
 import './Product.css'
-
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form'
+import {Link, useHistory} from 'react-router-dom'
+import { FaRegEye } from 'react-icons/fa'
 import {
     SortableContainer,
     SortableElement,
     SortableHandle
 } from "react-sortable-hoc";
 import arrayMove from "array-move";
-// import PopUp from "../../Components/PopUp/PopUp";
+import PopUpWindow from "../../Components/PopUpWindow/PopUpWindow";
+import InputField from "../../Components/InputField/InputField";
+import Button from "../../Components/Buttons/Button";
+
+
+
 
 
 // To DO lijst!!!
@@ -29,81 +36,35 @@ import arrayMove from "array-move";
 
 function Product() {
 
-        const [selectedImage, setSelectedImage] = useState([])
-        const [popup, setPopup] = useState(false);
-    // const [popup, togglePopup] = useState([])
-        // const [zoom, setZoom] = useState([])
-    //     const [photos, setPhotos] = React.useState([
-    //
-    //     {
-    //         id: 1,
-    //         preview:
-    //             <UploadButton/>,
-    //         caption: "test 1",
-    //         starred: true
-    //     },
-    //     {
-    //         id: 2,
-    //         preview:
-    //             <UploadButton/>,
-    //         caption: "test 2"
-    //     },
-    //     {
-    //         id: 3,
-    //         preview:
-    //             <UploadButton/>,
-    //         caption: "test 3"
-    //     },
-    //     {
-    //         id: 4,
-    //         preview:
-    //             <UploadButton/>,
-    //         caption: "test 4",
-    //     },
-    //     {
-    //         id: 5,
-    //         preview:
-    //             <UploadButton/>,
-    //         caption: "test 5"
-    //     },
-    //     {
-    //         id: 6,
-    //         preview:
-    //             <UploadButton/>,
-    //         caption: "test 6"
-    //     },
-    //     {
-    //         id: 7,
-    //         preview:
-    //             <UploadButton/>,
-    //         caption: "test 7"
-    //     }
-    // ]);
+        const [selectedImages, setSelectedImages] = useState([]);
+        // const [openPopup, toggleOpenPopup] = useState(false);
+        const myRef = React.createRef();
+        const history = useHistory();
 
+
+
+    const { register, formState: errors} = useForm({
+        mode: "onChange"
+    });
 
     const Handle = SortableHandle(({ tabIndex }) => (
         <div className='handle' tabIndex={tabIndex}>
-            {/*<svg viewBox="0 0 50 50">*/}
-            {/*<path*/}
-            {/*    d="M 0 7.5 L 0 12.5 L 50 12.5 L 50 7.5 L 0 7.5 z M 0 22.5 L 0 27.5 L 50 27.5 L 50 22.5 L 0 22.5 z M 0 37.5 L 0 42.5 L 50 42.5 L 50 37.5 L 0 37.5 z"*/}
-            {/*    color="#000"*/}
-            {/*/>*/}
-            {/*</svg>*/}
+
         </div>
     ));
 
     const SortableItem = SortableElement(props => {
+
         const { value: item } = props;
-        // console.log('wat is dat???????????',props);
+
         return (
 
-            <div className='content'>
+            <div className='content' ref={myRef}>
                 {item.caption}
                 {props.shouldUseDragHandle && <Handle />}
-                {<img src={selectedImage} className='picSize' alt='Loading...' />}
-
+                {<img src={props.url} className='picSize' alt='Loading...' />}
+                {<FaRegEye className='iconEye' onClick={()=> history.push(`/modal/${props.key}`)}/>}
             </div>
-
         );
     });
 
@@ -111,29 +72,35 @@ function Product() {
     const SortableList = SortableContainer(props => {
         const { items, ...restProps } = props;
         return (
-            <div className='StyledContainer'>
-                {items.map((item, index) => (
-                    <SortableItem
-                        key={`item-${item.id}`}
+            <div className='StyledContainer' ref={myRef}>
+                {items.map((item, index) => {
+                    console.log('wat zit hierin?',items)
+                    return < SortableItem
+                        ref={myRef}
+                        key={`item-${item.key}`}
+                        url = {item.key}
                         index={index}
                         value={item}
-                        {...restProps}
+                        {...
+                            restProps
+                        }
                     />
-                ))}
+                })}
             </div>
         );
     });
-    // `item-${item.id}`
+
         const onSortEnd = ({ oldIndex, newIndex }) => {
-            setSelectedImage(arrayMove(selectedImage, oldIndex, newIndex));
+            setSelectedImages(arrayMove(selectedImages, oldIndex, newIndex));
         };
 
         function imageHandleChange(e) {
             // console.log('Laat dit fotos zien??????????', e.target.files)
+
             if(e.target.files) {
                 const fileArray = Array.from(e.target.files).map((file)=> URL.createObjectURL(file))
                 console.log(fileArray)
-                setSelectedImage((prevImages)=>prevImages.concat(fileArray))
+                setSelectedImages((prevImages)=>prevImages.concat(fileArray))
                 Array.from(e.target.files).map(
                     (file)=>URL.revokeObjectURL(file)
                 )
@@ -141,8 +108,9 @@ function Product() {
         }
 
         function renderPhotos(source) {
-            return source.map((selectedImage)=> {
-                return <img className="resize" src={selectedImage} key={selectedImage} alt='Uploaded'/>
+
+            return source.map((selectedImages)=> {
+                return <img className="resize" src={selectedImages} key={selectedImages} alt='Uploaded'/>
             })
         }
 
@@ -151,29 +119,62 @@ function Product() {
 
         <div className='overAllSize'>
             <div className='productForm'>
-                {/*<div className='result'>*/}
-                {/*    {renderPhotos(selectedImage)}*/}
-                {/*</div>*/}
-                <div className='container'>
+                <div className='container' ref={myRef}>
+                    {/*<PopUpWindow>*/}
+                    {/*    <InputField*/}
+                    {/*        name='price'*/}
+                    {/*        type='text'*/}
+                    {/*        placeholder='Prijs'*/}
+                    {/*        fieldRef={register("email",*/}
+                    {/*            {*/}
+                    {/*                required: {*/}
+                    {/*                    value: false,*/}
+                    {/*                }*/}
+                    {/*            }*/}
+                    {/*        )}*/}
+                    {/*        errors={errors}*/}
+                    {/*    />*/}
+                    {/*    <InputField*/}
+                    {/*        name='shop'*/}
+                    {/*        type='text'*/}
+                    {/*        placeholder='Winkel naam'*/}
+                    {/*        fieldRef={register("winkel",*/}
+                    {/*            {*/}
+                    {/*                required: {*/}
+                    {/*                    value: false,*/}
+                    {/*                }*/}
+                    {/*            }*/}
+                    {/*        )}*/}
+                    {/*        errors={errors}*/}
+                    {/*    />*/}
+                    {/*</PopUpWindow>*/}
                     <SortableList
-                        key={selectedImage.id}
+                        key={selectedImages.key}
                         lockToContainerEdges={true}
                         shouldUseDragHandle={true}
                         useDragHandle
                         axis="xy"
-                        items={renderPhotos(selectedImage)}
+                        items={renderPhotos(selectedImages)}
                         onSortEnd={onSortEnd}
                     />
                 </div>
                 {/*{renderPhotos(selectedImage)}*/}
                 {/* eslint-disable-next-line react/jsx-no-undef */}
-                {/*<PopUp trigger={popup} setTrigger={setPopup}> <h3>My popup</h3> </PopUp>*/}
-                {/*<button onClick={() => setPopup(true)}>Open popup</button>*/}
+
+
 
                 <input hidden type='file' name='upload' multiple id='file' onChange={imageHandleChange}/>
                 <label htmlFor='file' className='uploadButtonStyle'>Add Photo</label>
+                <Link to='/list'>
+                    <Button
+                        type='button'
+                        name='toList'
+                        title='My lists'
+                    />
+                </Link>
 
             </div>
+
         </div>
     );
 }

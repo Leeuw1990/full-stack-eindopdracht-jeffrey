@@ -20,8 +20,10 @@ function SignIn() {
         console.log(data);
 
         try {
-            const result = await axios.post("http://localhost:3000/login", data);
-
+            const result = await axios.post("http://localhost:8080/authenticate", data);
+            console.log("krijg ik hier een token? result", result)
+            console.log("krijg ik hier een token? data", data)
+            // const result = await axios.post("http://localhost:8080/login", data);
             login(result.data.accessToken);
 
         } catch (e) {
@@ -38,13 +40,13 @@ function SignIn() {
 
                 <InputField
                     type="text"
-                    name="email"
-                    placeholder="E-mail"
-                    fieldRef={register("email",
+                    name="username"
+                    placeholder="Gebruikersnaam"
+                    fieldRef={register("username",
                         {
                             required: {
                                 value: true,
-                                message: "E-mail is verplicht",
+                                message: "Gebruikersnaam is verplicht",
                             }
                         }
                     )}
@@ -53,9 +55,9 @@ function SignIn() {
 
                 <InputField
                     type="password"
-                    name="pass"
+                    name="password"
                     placeholder="Wachtwoord"
-                    fieldRef={register("pass",
+                    fieldRef={register("password",
                         {
                             required: {
                                 value: true,

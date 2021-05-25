@@ -25,22 +25,22 @@ function AuthContextProvider({children}) {
         // console.log(jwtToken)
         const decoded = jwt_decode(jwtToken)
         const userid = decoded.sub;
-        // console.log(userid)
+        console.log(userid)
         console.log(decoded)
         localStorage.setItem('token', jwtToken)
         try {
-            const result = await axios.get(`http://localhost:3000/600/users/${userid}`, {
+            const result = await axios.get('http://localhost:8080/authenticated', {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${jwtToken}`,
                 }
             })
-
+            // const result = await axios.get(`http://localhost:3000/600/users/${userid}`
             console.log(result)
             setAuthState({
                 user: {
                     email:result.data.email,
-                    userName:result.data.userName,
+                    username:result.data.username,
                     password:result.data.password,
                     age:result.data.age,
                     firstName:result.data.firstName,

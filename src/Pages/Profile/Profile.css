@@ -1,0 +1,49 @@
+.profileStyle {
+    border: solid #F4ECE5;
+    border-radius: 50px;
+    height: 600px;
+    width: 315px;
+    background-color: hsl(0, 0%, 87%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userDetails {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+
+
+}
+
+.profileButtons {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-self: flex-start;
+    bottom: 175px;
+}
+
+.profileSizeImage {
+    border-color: black;
+    height: 200px;
+    width: 150px;
+}
+
+.photoFieldSet {
+    margin-top: 10px;
+    display: flex;
+    border-color: black;
+    border-width:3px;
+    border-radius: 10px;
+    height: 205px;
+    width: 155px;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileUploadButtonStyle {
+
+
+}

@@ -1,7 +1,8 @@
 import './App.css';
 import React from "react";
-import {
+import { BrowserRouter as Router,
   Link,
+  useParams,
   Switch,
   Route,
 } from 'react-router-dom';
@@ -10,25 +11,17 @@ import SignUp from "./Pages/SignUp/SignUp";
 import SignIn from "./Pages/SignIn/SignIn";
 import Product from "./Pages/Product/Product";
 import ProductList from "./Pages/ProductList/ProductList";
+import PopUpWindow from "./Components/PopUpWindow/PopUpWindow";
+
 
 function App() {
 
   return (
-
       <div>
         <nav>
           <ul>
             <li>
-              <Link to="/sign-in">Sign-in</Link>
-            </li>
-            <li>
-              <Link to="/sign-up">Sign-up</Link>
-            </li>
-            <li>
               <Link to="/profile">Profile</Link>
-            </li>
-            <li>
-              <Link to="/product">product</Link>
             </li>
             <li>
               <Link to="/list">lists</Link>
@@ -49,9 +42,11 @@ function App() {
           <Route exact path="/product/:text" >
             <Product />
           </Route>
+          <Route exact path="/modal/:id">
+            <PopUpWindow />
+          </Route>
           <Route exact path="/list">
             <ProductList />
-
           </Route>
         </Switch>
         </div>

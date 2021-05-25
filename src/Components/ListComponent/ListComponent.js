@@ -25,9 +25,8 @@ function ListComponent() {
         }
         setLists(prev => prev.map(item => (item.id === listId ? newValue : item))
         );
-        console.log('binnen de update',listId, newValue)
     }
-    console.log('buiten update', updateList)
+
 
     function removeList(id) {
         const removeAtt = [...lists].filter(list => list.id !== id)

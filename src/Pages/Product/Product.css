@@ -12,6 +12,7 @@
 
 .uploadButtonStyle {
     font-family: 'Zen Dots', cursive;
+    margin-bottom: 10px;
     display: flex;
     width: 200px;
     height: 40px;
@@ -20,14 +21,9 @@
     color: #F4ECE5;
     align-items: center;
     justify-content: center;
+    box-shadow: 1px 2px 0px 0px black;
 }
 
-/*.styleItem {*/
-/*    float: left;*/
-/*    padding-left: 8px;*/
-/*    padding-right: 8px;*/
-/*    width: calc(25% - 16px);*/
-/*}*/
 .content {
     /*padding: 8px 12px;*/
     float: left;
@@ -41,7 +37,6 @@
     width: 95px;
     position: absolute;
     z-index: 1;
-
 }
 
 
@@ -55,22 +50,18 @@
     height: 500px;
     width: 315px;
 }
-/*.StyledContainer:after {*/
-/*     content: "";*/
-/*     clear: both;*/
-/*     display: table;*/
-/* }*/
+
 
 .container {
     /*border: solid red;*/
-    height: 500px;
+    height: 440px;
     width: 315px;
 }
 
 .handle {
     display: flex;
     width: 95px;
-    height: 40px;
+    height: 95px;
     background-color: transparent;
     overflow: hidden;
     cursor: grab;
@@ -81,6 +72,13 @@
 .resize {
     height: 50px;
     width: 50px;
-    
+}
+
+.iconEye {
+    display: flex;
+    z-index: 3;
+    color: black;
+    position: absolute;
+    font-size: 35px;
 }
 
