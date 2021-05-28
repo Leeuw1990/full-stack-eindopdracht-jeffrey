@@ -18,8 +18,7 @@ function ProductList() {
                     title='Profile'
                 />
                 </Link>
-
-        <ListComponent />
+                <ListComponent />
             </div>
 
       </div>
