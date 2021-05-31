@@ -6,65 +6,75 @@ import axios from "axios";
 import ProductListService from "../../service/ProductListService";
 
 
-function ListComponent() {
-    const [lists, setLists] = useState([])
-    const [productLists, setProductLists] = useState('http://localhost:8080/productlist/')
+// function ListComponent() {
+//     const [lists, setLists] = useState([])
+//     const [productLists, setProductLists] = useState([])
+//
+//     useEffect(()=>  {
+//
+//     async function fetchData() {
+//
+//         try {
+//             const response = await axios.post('http://localhost:8080/productlist/', {
+//                 method: "POST",
+//                 headers: {"Content-Type": "application/json"},
+//                 body: JSON.stringify({listName:productLists.listName})
+//
+//             })
+//             setProductLists(response.data)
+//
+//             // setProductLists(data)
+//
+//         } catch (e) {
+//             console.error(e)
+//         }
+//     }
+//         fetchData()
+//
+//
+//     }, [productLists])
 
-    useEffect(()=>  {
-
-    async function fetchData() {
-
-        try {
-            const response = await axios.get(productLists)
-            console.log('response product', response)
-
-            // setProductLists(data)
-
-        } catch (e) {
-            console.error(e)
-        }
-    }
-    fetchData()
-
-    }, [])
 
 
-    function addList(list) {
-            if (!list.text || /^\s*$/.test(list.text)) {
-                return;
-            }
-            const newList = [list, ...lists]
-        setLists(newList)
-    }
+    // function addList(list) {
+    //     if (!list.text || /^\s*$/.test(list.text)) {
+    //         return;
+    //     }
+    //     const newList = [list, ...productLists]
+    //     setProductLists(newList.text)
+    //     console.log('addlist',list.text)
+    // }
 
-    function updateList(listId, newValue) {
-        if (!newValue.text || /^\s*$/.test(newValue.text)) {
-            return;
-        }
-        setLists(prev => prev.map(item => (item.id === listId ? newValue : item))
-        );
-    }
-
-    function removeList(id) {
-        const removeAtt = [...lists].filter(list => list.id !== id)
-        setLists(removeAtt)
-    }
-
-    return(
-        <div className={styles.listComponent}>
-        <ListForm onSubmit={addList}/>
-        <List
-        lists={lists}
+    // console.log('???????',setProductLists)
+    //
+    // function updateList(listId, newValue) {
+    //     if (!newValue.text || /^\s*$/.test(newValue.text)) {
+    //         return;
+    //     }
+    //     setLists(prev => prev.map(item => (item.id === listId ? newValue : item))
+    //     );
+    // }
+    //
+    // function removeList(id) {
+    //     const removeAtt = [...lists].filter(list => list.id !== id)
+    //     setLists(removeAtt)
+    // }
+    //
+    // return(
+    //     <div className={styles.listComponent}>
+    //     <ListForm />
+    //     <List
+    //     lists={productLists}
         // renderLists={}
         // completeList={completeList}
-        removeList={removeList}
-        updateList={updateList}
-        />
-        </div>
-    )
-}
-
-export default ListComponent;
+//         removeList={removeList}
+//         updateList={updateList}
+//         />
+//         </div>
+//     )
+// }
+//
+// export default ListComponent;
 
 //functie ombouwen om naar Product te navigeren.
 // 1. useHistory importeren.

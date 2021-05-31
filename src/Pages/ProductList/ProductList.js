@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import ListComponent from "../../Components/ListComponent/ListComponent";
 import './ProductList.css'
 import Button from "../../Components/Buttons/Button";
+import ListForm from "../../Components/ListForm/ListForm";
+import List from "../../Components/List/List";
 
 function ProductList() {
 
@@ -18,7 +20,10 @@ function ProductList() {
                     title='Profile'
                 />
                 </Link>
-                <ListComponent />
+                {/*<ListComponent />*/}
+                <ListForm/>
+                <List/>
+
             </div>
 
       </div>

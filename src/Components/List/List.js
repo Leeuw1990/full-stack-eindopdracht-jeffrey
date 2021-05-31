@@ -5,8 +5,13 @@ import { useHistory } from 'react-router-dom';
 import axios from "axios";
 
 
-function List({removeList, updateList, lists} ) {
+function List({removeList, updateList}) {
     const [listsData, setListsdata] = useState([]);
+    const [edit, setEdit] = useState({
+        id: null,
+        value: ''
+    })
+    const history = useHistory();
 
     // console.log('wat krijg ik??',productLists)
 
@@ -14,7 +19,6 @@ function List({removeList, updateList, lists} ) {
     useEffect(()=>  {
 
     async function fetchData() {
-
         try {
             const response = await axios.get('http://localhost:8080/productlist/')
             console.log('response list', response)
@@ -27,14 +31,19 @@ function List({removeList, updateList, lists} ) {
     fetchData()
 
 }, [])
-    console.log('hallo?',listsData)
 
-    const history = useHistory();
+    // async function deleteData() {
+    //     try {
+    //         const listId = deleteList.data.productList_id
+    //         await axios.delete(`http://localhost:8080/productlist/${listId}`)
+    //
+    //     } catch (e) {
+    //         console.error(e)
+    //     }
+    // }
 
-    const [edit, setEdit] = useState({
-        id: null,
-        value: ''
-    })
+
+
 
     function submitUpdate(value) {
         updateList(edit.id, value)
@@ -47,15 +56,15 @@ function List({removeList, updateList, lists} ) {
     if(edit.id) {
         return <ListForm edit={edit} onSubmit={submitUpdate}/>
     }
+    console.log('wat zit er in edit?',  edit)
 
     return listsData.map((name, index) => (
         <div key={index}>
             <div className={styles.icon}>
 
-                <div className={styles.listText} key={index} onClick={() => history.push(`/product/${name.listName}`)} >
+                <div className={styles.listText} key={index} onClick={() => history.push(`/product/${name.productList_id}`)} >
                     {name.listName}
                 </div>
-
 
                 <div onClick={() => removeList(index)}
                 className='deleteIcon'
