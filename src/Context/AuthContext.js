@@ -10,7 +10,6 @@ function AuthContextProvider({children}) {
         user: null,
         status: 'pending',
     });
-    console.log("Hall wat gebeurt er??????????",history)
 
     useEffect(()=> {
         const token = localStorage.getItem('JWT_token')
@@ -24,30 +23,27 @@ function AuthContextProvider({children}) {
         }
     },[])
     async function loginFunction(jwtToken) {
-        // console.log(jwtToken)
+
         const decoded = jwt_decode(jwtToken)
-        // const userid = decoded.sub;
-        // console.log(userid)
-        console.log(decoded)
+        const userId = decoded.sub;
         localStorage.setItem('token', jwtToken)
         try {
-            const result = await axios.get('http://localhost:8080/authenticated', {
+            const result = await axios.get(`http://localhost:8080/api/users/user/${userId}`, {
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": 'Bearer' + jwtToken,
+                    "Authorization": `Bearer ${jwtToken}`,
                 }
             })
-            // const result = await axios.get(`http://localhost:3000/600/users/${userid}`
-            console.log(result)
+
             setAuthState({
                 user: {
-                    // email:result.data.email,
+                    email:result.data.email,
                     username:result.data.username,
                     password:result.data.password,
-                    // age:result.data.age,
-                    // firstName:result.data.firstName,
-                    // lastName:result.data.lastName,
-                    // id:result.data.id,
+                    token: jwtToken,
+                    firstName:result.data.firstName,
+                    lastName:result.data.lastName,
+                    id:result.data.id,
                 },
                 status: 'done',
             });
@@ -72,7 +68,7 @@ function AuthContextProvider({children}) {
                 status: 'done',
             }
         )
-        history.push("/sign-in");
+        history.push("/signin");
 
     }
 

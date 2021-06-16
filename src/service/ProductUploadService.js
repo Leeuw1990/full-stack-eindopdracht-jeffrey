@@ -1,7 +1,7 @@
 import React from 'react';
 import http from "../http-common";
 
-class UploadService {
+class ProductUploadService {
     upload(file, onUploadProgress) {
         let formData = new FormData();
 
@@ -20,4 +20,4 @@ class UploadService {
     }
 }
 
-export default new UploadService();
+export default new ProductUploadService();

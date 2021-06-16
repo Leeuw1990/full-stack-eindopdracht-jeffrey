@@ -12,6 +12,7 @@ import SignIn from "./Pages/SignIn/SignIn";
 import Product from "./Pages/Product/Product";
 import ProductList from "./Pages/ProductList/ProductList";
 import PopUpWindow from "./Components/PopUpWindow/PopUpWindow";
+import ProductCLEAN from "./Pages/Product/ProductCLEAN";
 
 
 function App() {
@@ -30,17 +31,17 @@ function App() {
         </nav>
 
         <Switch>
-          <Route exact path="/sign-in">
+          <Route exact path="/signin">
             <SignIn />
           </Route>
-          <Route exact path="/sign-up">
+          <Route exact path="/signup">
             <SignUp />
           </Route>
           <Route exact path="/profile">
             <Profile />
           </Route>
           <Route exact path="/product/:text" >
-            <Product />
+            <Product/>
           </Route>
           <Route exact path="/modal/:id">
             <PopUpWindow />

@@ -1,26 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import ListForm from "../ListForm/ListForm";
 import styles from './List.module.css';
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
 
 
-function List({removeList, updateList}) {
+function List() {
     const [listsData, setListsdata] = useState([]);
-    const [edit, setEdit] = useState({
-        id: null,
-        value: ''
-    })
     const history = useHistory();
 
-    // console.log('wat krijg ik??',productLists)
-
-    // console.log('list component', productLists)
     useEffect(()=>  {
 
     async function fetchData() {
         try {
-            const response = await axios.get('http://localhost:8080/productlist/')
+            const response = await axios.get('http://localhost:8080/api/productlist/')
             console.log('response list', response)
             setListsdata(response.data)
 
@@ -32,31 +24,42 @@ function List({removeList, updateList}) {
 
 }, [])
 
-    // async function deleteData() {
-    //     try {
-    //         const listId = deleteList.data.productList_id
-    //         await axios.delete(`http://localhost:8080/productlist/${listId}`)
-    //
-    //     } catch (e) {
-    //         console.error(e)
-    //     }
+
+    async function deleteData(listId) {
+        try {
+            await axios.delete(`http://localhost:8080/api/productlist/${listId}`, {
+                method: "DELETE",
+            }).then(()=>{
+                window.location.reload(false);
+            })
+
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+    async function updateData(listId) {
+        try {
+            await axios.put(` http://localhost:8080/api/productlist${listId}`, {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify,
+
+            }).then(() => {
+                console.log("List updated")
+            })
+
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+
+
+    // if(updateData) {
+    //     return <ListForm onSubmit={updateData}/>
     // }
-
-
-
-
-    function submitUpdate(value) {
-        updateList(edit.id, value)
-        setEdit({
-            id: null,
-            value: ''
-        })
-    }
-
-    if(edit.id) {
-        return <ListForm edit={edit} onSubmit={submitUpdate}/>
-    }
-    console.log('wat zit er in edit?',  edit)
+    // console.log('wat zit er in edit?')
 
     return listsData.map((name, index) => (
         <div key={index}>
@@ -66,15 +69,15 @@ function List({removeList, updateList}) {
                     {name.listName}
                 </div>
 
-                <div onClick={() => removeList(index)}
+                <div onClick={() => deleteData(name.productList_id)}
                 className='deleteIcon'
                 >Remove</div>
-                <div onClick={() => setEdit({id: name.id, value: name.listName})}
-                className='editIcon'
-                >Edit</div>
+                {console.log('DELETE!!!!', name.productList_id)}
+                {/*<div onClick={() => updateData(name.productList_id)}*/}
+                {/*className='editIcon'*/}
+                {/*>Edit</div>*/}
              </div>
         </div>
-
         ));
 }
 

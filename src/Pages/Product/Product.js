@@ -1,5 +1,5 @@
 import './Product.css'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form'
 import {Link, useHistory} from 'react-router-dom'
 import { FaRegEye } from 'react-icons/fa'
@@ -12,10 +12,9 @@ import arrayMove from "array-move";
 import PopUpWindow from "../../Components/PopUpWindow/PopUpWindow";
 import InputField from "../../Components/InputField/InputField";
 import Button from "../../Components/Buttons/Button";
-
-
-
-
+import ProductUploadService from "../../service/ProductUploadService";
+import UploadService from "../../service/UploadService";
+import axios from "axios";
 
 // To DO lijst!!!
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -33,32 +32,64 @@ import Button from "../../Components/Buttons/Button";
 // 4 [] pictogram functie geven naar popup component.
 // 5 [] via popup component de foto kunnen updaten en verwijderen.
 
-
 function Product() {
 
-        const [selectedImages, setSelectedImages] = useState([]);
+        // const [selectedImages, setSelectedImages] = useState([]);
         // const [openPopup, toggleOpenPopup] = useState(false);
+
+    /////////////////////////////////////////////////////////////////////////////
+    // const [selectedFiles, setSelectedFiles] = useState(undefined);
+    // const [currentFile, setCurrentFile] = useState(undefined);
+    // const [progress, setProgress] = useState(0);
+    // const [message, setMessage] = useState('');
+    // const [fileInfos, setFileInfos] = useState([]);
+    // const [previewImage, setPreviewImage] = useState(undefined);
+    // const [imageData, setImageData] = useState({});
+
+    const [uploadedFiles, setUploadedFiles] = useState([]);
+    const [progress, setProgress] = useState(0);
+    const [selectedFiles, setSelectedFiles] = useState(undefined);
+
         const myRef = React.createRef();
         const history = useHistory();
-
-
 
     const { register, formState: errors} = useForm({
         mode: "onChange"
     });
 
+    function selectFile(event) {
+        setSelectedFiles(event.target.files)
+    }
+
+    async function uploadImage() {
+        setProgress(0);
+        const currentFile = selectedFiles[0];
+
+        try {
+            // AFBEELDING UPLOADEN
+            const response = await ProductUploadService.upload(currentFile, (event) => {
+                setProgress(Math.round((100 * event.loaded) / event.total));
+            });
+
+            // @todo: communiceer met de gebruiker response.data.message
+
+            // ALLE AFBEELDINGEN OPHALEN
+            const allFiles = await ProductUploadService.getFiles();
+            setUploadedFiles(allFiles.data);
+        } catch (e) {
+            setProgress(0);
+            // @todo: communiceer met de gebruiker dat er een error is
+        }
+    }
+
     const Handle = SortableHandle(({ tabIndex }) => (
         <div className='handle' tabIndex={tabIndex}>
-
         </div>
     ));
 
     const SortableItem = SortableElement(props => {
-
         const { value: item } = props;
-
         return (
-
             <div className='content' ref={myRef}>
                 {item.caption}
                 {props.shouldUseDragHandle && <Handle />}
@@ -74,7 +105,6 @@ function Product() {
         return (
             <div className='StyledContainer' ref={myRef}>
                 {items.map((item, index) => {
-                    console.log('wat zit hierin?',items)
                     return < SortableItem
                         ref={myRef}
                         key={`item-${item.key}`}
@@ -91,28 +121,50 @@ function Product() {
     });
 
         const onSortEnd = ({ oldIndex, newIndex }) => {
-            setSelectedImages(arrayMove(selectedImages, oldIndex, newIndex));
+            setUploadedFiles(arrayMove(uploadedFiles, oldIndex, newIndex));
         };
 
-        function imageHandleChange(e) {
-            // console.log('Laat dit fotos zien??????????', e.target.files)
+        // function imageHandleChange(e) {
+        //     console.log('Laat dit fotos zien??????????', e.target.files)
+        //
+        //     if(e.target.files) {
+        //         const fileArray = Array.from(e.target.files).map((file)=> URL.createObjectURL(file))
+        //         console.log(fileArray)
+        //         setSelectedImages((prevImages)=>prevImages.concat(fileArray))
+        //         Array.from(e.target.files).map(
+        //             (file)=>URL.revokeObjectURL(file)
+        //         )
+        //     }
+        // }
 
-            if(e.target.files) {
-                const fileArray = Array.from(e.target.files).map((file)=> URL.createObjectURL(file))
-                console.log(fileArray)
-                setSelectedImages((prevImages)=>prevImages.concat(fileArray))
-                Array.from(e.target.files).map(
-                    (file)=>URL.revokeObjectURL(file)
-                )
-            }
-        }
+        // function renderPhotos(source) {
+        //     return source.map((selectedImages)=> {
+        //         return <img className="resize" src={selectedImages} key={selectedImages} alt='Uploaded'/>
+        //     })
+        // }
 
-        function renderPhotos(source) {
+        // useEffect(() => {
+        //
+        // async function renderImage() {
+        //     try {
+        //         const responseImage = await axios.get('http://localhost:8080/api/product/files');
+        //         // setImageData(responseImage)
+        //         console.log('wat zit er in image',responseImage)
+        //
+        //     } catch (e) {
+        //         console.error(e)
+        //     }
+        // }
+        // renderImage()
+        //
+        // },[])
 
-            return source.map((selectedImages)=> {
-                return <img className="resize" src={selectedImages} key={selectedImages} alt='Uploaded'/>
-            })
-        }
+    function renderImages() {
+        uploadedFiles.length > 0 && uploadedFiles.map((uploadedFile) => {
+            return <img src={uploadedFile.url} alt="hoi"/>
+        })
+    }
+
 
 
     return(
@@ -120,51 +172,47 @@ function Product() {
         <div className='overAllSize'>
             <div className='productForm'>
                 <div className='container' ref={myRef}>
-                    {/*<PopUpWindow>*/}
-                    {/*    <InputField*/}
-                    {/*        name='price'*/}
-                    {/*        type='text'*/}
-                    {/*        placeholder='Prijs'*/}
-                    {/*        fieldRef={register("email",*/}
-                    {/*            {*/}
-                    {/*                required: {*/}
-                    {/*                    value: false,*/}
-                    {/*                }*/}
-                    {/*            }*/}
-                    {/*        )}*/}
-                    {/*        errors={errors}*/}
-                    {/*    />*/}
-                    {/*    <InputField*/}
-                    {/*        name='shop'*/}
-                    {/*        type='text'*/}
-                    {/*        placeholder='Winkel naam'*/}
-                    {/*        fieldRef={register("winkel",*/}
-                    {/*            {*/}
-                    {/*                required: {*/}
-                    {/*                    value: false,*/}
-                    {/*                }*/}
-                    {/*            }*/}
-                    {/*        )}*/}
-                    {/*        errors={errors}*/}
-                    {/*    />*/}
-                    {/*</PopUpWindow>*/}
                     <SortableList
-                        key={selectedImages.key}
+                        key={uploadedFiles.key}
                         lockToContainerEdges={true}
                         shouldUseDragHandle={true}
                         useDragHandle
                         axis="xy"
-                        items={renderPhotos(selectedImages)}
+                        items={renderImages(uploadedFiles)}
                         onSortEnd={onSortEnd}
                     />
                 </div>
-                {/*{renderPhotos(selectedImage)}*/}
-                {/* eslint-disable-next-line react/jsx-no-undef */}
+
+                {/*<input hidden type='file' name='upload' multiple id='file' onChange={upload}/>*/}
+                {/*<label htmlFor='file' className='uploadButtonStyle'>Add Photo</label>*/}
+                <div>
+
+
+                    <label className="btn btn-default">
+                        <input type="file" onChange={selectFile} />
+                    </label>
+
+                    <button className="btn btn-success"
+                            disabled={!selectedFiles}
+                            onClick={uploadImage}
+                    >
+                        Upload
+                    </button>
 
 
 
-                <input hidden type='file' name='upload' multiple id='file' onChange={imageHandleChange}/>
-                <label htmlFor='file' className='uploadButtonStyle'>Add Photo</label>
+                    {/*<div className="card">*/}
+                    {/*    <div className="card-header">List of Files</div>*/}
+                    {/*    <ul className="list-group list-group-flush">*/}
+                    {/*        {fileInfos &&*/}
+                    {/*        fileInfos.map((file, index) => (*/}
+                    {/*            <li className="list-group-item" key={index}>*/}
+                    {/*                <a href={file.url}>{file.name}</a>*/}
+                    {/*            </li>*/}
+                    {/*        ))}*/}
+                    {/*    </ul>*/}
+                    {/*</div>*/}
+                </div>
                 <Link to='/list'>
                     <Button
                         type='button'
@@ -172,9 +220,7 @@ function Product() {
                         title='My lists'
                     />
                 </Link>
-
             </div>
-
         </div>
     );
 }
