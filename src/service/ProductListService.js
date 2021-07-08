@@ -1,24 +1,24 @@
 import http from '../http-common';
+import React from 'react';
 
-    const getAll = async () => {
-        return http.get('/productlist');
+class ProductListService {
+
+    createProductList(listName) {
+
+        let data = new data();
+
+        data.append('listName', listName)
+
+        return http.post('api/productlist')
     }
 
-    const updateProductList = (listName) => {
-        return http.put('/productlist', listName);
+
+    getProductList() {
+        return http.get('api/productlist')
     }
 
-    const removeProductList = (listId) => {
-        return http.delete(`/productlist/${listId}`);
-    }
 
-    const addProductList = (listName) => {
-        return http.post('/productlist', listName);
-    }
-
-export default {
-    getAll,
-    updateProductList,
-    removeProductList,
-    addProductList
 }
+
+export default ProductListService;
+

@@ -22,7 +22,7 @@ function SignUp() {
         try {
             await axios.post('http://localhost:8080/api/auth/signup', data);
             toggleRegisterSucces(true);
-            setTimeout(()=>{history.push('/signin');
+            setTimeout(()=>{history.push('/');
             }, 2000)
         } catch (e) {
             console.error(e)
@@ -116,7 +116,7 @@ function SignUp() {
                 />
                 {registerSucces === true && <p>Het registreren is gelukt! U wordt nu doorgestuurd naar de login pagina.</p>}
                 {loading === true && <span>"Page is loading!"</span>}
-                Heeft u al een account? Klik <Link to='/signin'>hier!</Link>
+                Heeft u al een account? Klik <Link to='/'>hier!</Link>
             </form>
         </>
         </div>

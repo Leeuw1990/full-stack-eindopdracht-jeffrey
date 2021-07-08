@@ -1,8 +1,7 @@
 import './App.css';
 import React from "react";
-import { BrowserRouter as Router,
+import {
   Link,
-  useParams,
   Switch,
   Route,
 } from 'react-router-dom';
@@ -12,10 +11,11 @@ import SignIn from "./Pages/SignIn/SignIn";
 import Product from "./Pages/Product/Product";
 import ProductList from "./Pages/ProductList/ProductList";
 import PopUpWindow from "./Components/PopUpWindow/PopUpWindow";
-import ProductCLEAN from "./Pages/Product/ProductCLEAN";
 
 
-function App() {
+
+function App({uploadedFiles}) {
+
 
   return (
       <div>
@@ -31,7 +31,7 @@ function App() {
         </nav>
 
         <Switch>
-          <Route exact path="/signin">
+          <Route exact path="/">
             <SignIn />
           </Route>
           <Route exact path="/signup">
@@ -40,13 +40,13 @@ function App() {
           <Route exact path="/profile">
             <Profile />
           </Route>
-          <Route exact path="/product/:text" >
+          <Route exact path="/product/:id" component={Product}>
             <Product/>
           </Route>
-          <Route exact path="/modal/:id">
+          <Route exact path="/modal/:url" component={PopUpWindow}>
             <PopUpWindow />
           </Route>
-          <Route exact path="/list">
+          <Route exact path="/productlist">
             <ProductList />
           </Route>
         </Switch>

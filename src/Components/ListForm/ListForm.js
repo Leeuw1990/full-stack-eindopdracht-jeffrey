@@ -1,74 +1,31 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React ,{useState} from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './ListForm.module.css'
 import axios from "axios";
 import InputField from "../InputField/InputField";
-import List from "../List/List";
 
-function ListForm(props) {
-    // const [productLists, setProductLists] = useState([]);
-    // const [input, setInput] = useState(props.edit ? props.edit.value : '');
+function ListForm() {
 
+    const [loading, toggleLoading] = useState(false);
     const { handleSubmit,register, formState:{errors} } = useForm({
         mode: "onSubmit"
     });
 
-        async function postData(data) {
-            console.log('klopt mijn data', data)
-            console.log('listname', data.listName)
-            try {
-                await axios.post('http://localhost:8080/api/productlist', {
-                    method: "POST",
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify,
-                    listName: data.listName
+    async function postData(data) {
+                toggleLoading(true);
+        try {
+            await axios.post('http://localhost:8080/api/productlist', data, {
+                headers: {  "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            })
 
-                }).then(() => {
-                    console.log("List added")
-                })
-            } catch (e) {
-                console.error(e)
-            }
+        } catch (e) {
+            console.error(e)
         }
+                toggleLoading(false);
+    }
 
-        function refreshPage() {
-            window.location.reload(false);
-        }
-
-        // async function updateData() {
-        //     try {
-        //         await axios.put('http://localhost:8080/productlist', {
-        //             method: "PUT",
-        //             headers: {"Content-Type": "application/json"},
-        //             body: JSON.stringify,
-        //
-        //         }).then(() => {
-        //             console.log("List updated")
-        //         })
-        //
-        //     } catch (e) {
-        //         console.log(e)
-        //     }
-        // }
-
-
-    // const inputRef = useRef(null);
-    // useEffect(() => {
-    //     inputRef.current.focus();
-
-    // function handleChange(data) {
-    //     setInput(data.target.value);
-    // }
-
-    // function handleDataSubmit(data) {
-    //
-    //         data.preventDefault();
-    //         props.onSubmit({
-    //             id: Math.floor(Math.random() * 10000),
-    //             text: input
-    //         });
-    //         setInput('');
-    // }
 
     return(
         <div>
@@ -88,35 +45,16 @@ function ListForm(props) {
                         )}
                         errors={errors}
                     />
-                <button type='submit' name='listName' onClick={refreshPage} className={styles.addListButton} >Create list!</button>
+                <button type='submit' name='listName' className={styles.addListButton} >Create list!</button>
+                {loading === true && <p>Lijst toegevoegd!</p>}
             </form>
         </div>
     );
 }
 
-
 export default ListForm;
 
-// <>
-//     <InputField
-//         type="text"
-//         name="updateName"
-//         placeholder="Create list"
-//         fieldRef={register("updateName",
-//             {
-//                 required: {
-//                     value: false,
-//                     message: "Invoer nodig",
-//                 }
-//             }
-//         )}
-//         errors={errors}
-//     />
-//     <button type='submit' name='updateName' className={styles.editListButton} >Update</button>
-// </>
-// ) :
-// (
-//     <>
+
 
 
 

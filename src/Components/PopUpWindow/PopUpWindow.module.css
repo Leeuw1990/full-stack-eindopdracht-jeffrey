@@ -12,5 +12,9 @@
     justify-content: center;
     position: absolute;
     z-index: 1000;
+}
 
+.image {
+    width: 275px;
+    height: 200px;
 }

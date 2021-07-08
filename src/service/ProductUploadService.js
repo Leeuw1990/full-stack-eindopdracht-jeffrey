@@ -16,7 +16,11 @@ class ProductUploadService {
     }
 
     getFiles() {
-        return http.get("/api/product/files");
+        return http.get("/api/product/files", {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        });
     }
 }
 

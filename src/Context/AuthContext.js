@@ -68,7 +68,7 @@ function AuthContextProvider({children}) {
                 status: 'done',
             }
         )
-        history.push("/signin");
+        history.push("/");
 
     }
 
