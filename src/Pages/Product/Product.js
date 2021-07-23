@@ -1,6 +1,6 @@
 import './Product.css'
 import React, { useState, useEffect } from 'react';
-import {Link, Route, useParams} from 'react-router-dom'
+import {Link, Route, useParams, useHistory} from 'react-router-dom'
 import { FaRegEye } from 'react-icons/fa'
 import Button from "../../Components/Buttons/Button";
 import ProductUploadService from "../../service/ProductUploadService";
@@ -14,7 +14,10 @@ function Product() {
     const [selectedFiles, setSelectedFiles] = useState(undefined);
 
     const [modalClose, setModalClose] = useState(false);
+    const [activeObject, setActiveObject] = useState(null);
     const [activeImage, setActiveImage] = useState(undefined);
+
+    const history = useHistory();
 
 
     function selectFile(event) {
@@ -51,37 +54,36 @@ function Product() {
     },[]);
 
 
-     function openModal(uploadedFile) {
-        setModalClose(prev => !prev);
-        setActiveImage(uploadedFile.url)
-
-
-    }
-
-    console.log(uploadedFiles[1])
-
-
-
-
-
-
     return(
         <div className='overAllSize'>
             <div className='productForm'>
                 <div className='container'>
                     <div>
-                        {uploadedFiles.length > 0 && uploadedFiles.map((uploadedFile, index) => {
-                            return <div key={uploadedFile.url} className='pictureContainer'><img className='pictureSize' src={uploadedFile.url} alt="hoi"/>
-                                       <FaRegEye onClick={openModal}/>
-                                <PopUpWindow
-                                    key={index}
-                                    modalClose={modalClose}
-                                    setModalClose={setModalClose}
-                                    oneImage={uploadedFile.url}
 
-                                />
+                        {uploadedFiles.length > 0 && uploadedFiles.map((uploadedFile, index) => {
+                            return <div key={index} className='pictureContainer'><img className='pictureSize' src={uploadedFile.url} alt="hoi" key={index}
+                                                                                      onClick={() => {
+                                                                                          setActiveObject({index, uploadedFile});
+                                                                                          setModalClose(true)
+                                                                                      }}/>
+                                       {/*<FaRegEye*/}
+                                       {/*    key={index}*/}
+                                       {/*    onClick={() => {*/}
+                                       {/*    setActiveObject({index, uploadedFile});*/}
+                                       {/*    setModalClose(true)*/}
+                                       {/*    }}*/}
+                                       {/*/>*/}
+                                {console.log(activeObject)}
+
+
                             </div>
                         })}
+
+                        { modalClose ? <PopUpWindow
+                            oneImage={activeObject}
+                            object={activeObject}
+                            modalClose={modalClose}
+                            setModalClose={setModalClose}/> : null}
                     </div>
 
                     <label className="btn btn-default">
