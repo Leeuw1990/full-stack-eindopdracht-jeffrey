@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../Context/AuthContext';
 import InputField from '../../Components/InputField/InputField';
-import './SignIn.css'
+import styles from './SignIn.module.css'
 
 function SignIn() {
     const { login } = useContext(AuthContext)
@@ -23,8 +23,8 @@ function SignIn() {
     }
 
     return(
-        <div className='overAllSize'>
-            <form className='signInForm' onSubmit={handleSubmit(submitData)}>
+        <div className={styles.overAllSize}>
+            <form className={styles.signInForm} onSubmit={handleSubmit(submitData)}>
                 <InputField
                     type='text'
                     name='username'

@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
-import './SignUp.css'
+import styles from './SignUp.module.css'
 import Button from '../../Components/Buttons/Button';
 import InputField from '../../Components/InputField/InputField';
 
@@ -30,9 +30,9 @@ function SignUp() {
         toggleLoading(false)
     }
     return(
-        <div className='overAllSize'>
+        <div className={styles.overAllSize}>
         <>
-            <form className='signUpForm' onSubmit={handleSubmit(submitData)}>
+            <form className={styles.signUpForm} onSubmit={handleSubmit(submitData)}>
                 <InputField
                     type='text'
                     name='firstName'

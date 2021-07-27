@@ -8,3 +8,13 @@
     flex-direction: column-reverse;
     align-items: center;
 }
+
+.overAllSize {
+    border: solid;
+    height: 650px;
+    width: 350px;
+    background: linear-gradient(hsl(222, 100%, 16%), hsl(243, 19%, 45%));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

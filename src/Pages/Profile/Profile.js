@@ -1,4 +1,4 @@
-import './Profile.css'
+import styles from './Profile.module.css'
 import { Link } from 'react-router-dom';
 import React, { useContext} from 'react';
 import { AuthContext } from "../../Context/AuthContext";
@@ -11,11 +11,11 @@ function Profile() {
     console.log('Profile', user)
 
     return(
-        <div className='overAllSize'>
-            <div className='profileStyle'>
+        <div className={styles.overAllSize}>
+            <div className={styles.profileStyle}>
                 <h1>Profiel</h1>
 
-                <div className='userDetails'>
+                <div className={styles.userDetails}>
             <h2>Gegevens:</h2>
                     <p><strong>Voornaam:</strong>{user && user.firstName}</p>
                     <p><strong>Achternaam:</strong>{user && user.lastName}</p>
@@ -23,7 +23,7 @@ function Profile() {
                     <p><strong>Email:</strong>{user && user.email}</p>
                 </div>
 
-                <div className='profileButtons'>
+                <div className={styles.profileButtons}>
                 <Link to='/productlist'>
                 <Button
                     type='button'
@@ -38,7 +38,6 @@ function Profile() {
                     onclick={logout}
                  />
                 </div>
-
             </div>
         </div>
     );

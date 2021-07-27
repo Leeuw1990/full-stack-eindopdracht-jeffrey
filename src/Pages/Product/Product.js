@@ -1,4 +1,4 @@
-import './Product.css'
+import styles from './Product.module.css'
 import React, { useState, useEffect } from 'react';
 import {Link, Route, useParams, useHistory} from 'react-router-dom'
 import { FaRegEye } from 'react-icons/fa'
@@ -55,13 +55,13 @@ function Product() {
 
 
     return(
-        <div className='overAllSize'>
-            <div className='productForm'>
-                <div className='container'>
+        <div className={styles.overAllSize}>
+            <div className={styles.productForm}>
+                <div className={styles.container}>
                     <div>
 
                         {uploadedFiles.length > 0 && uploadedFiles.map((uploadedFile, index) => {
-                            return <div key={index} className='pictureContainer'><img className='pictureSize' src={uploadedFile.url} alt="hoi" key={index}
+                            return <div key={index}><img className={styles.pictureSize} src={uploadedFile.url} alt="hoi" key={index}
                                                                                       onClick={() => {
                                                                                           setActiveObject({index, uploadedFile});
                                                                                           setModalClose(true)
@@ -86,12 +86,11 @@ function Product() {
                             setModalClose={setModalClose}/> : null}
                     </div>
 
-                    <label className="btn btn-default">
+                    <label>
                         <input type="file" onChange={selectFile} />
                     </label>
 
-                    <button className="btn btn-success"
-                            disabled={!selectedFiles}
+                    <button disabled={!selectedFiles}
                             onClick={uploadImage}
                     >
                         Upload
