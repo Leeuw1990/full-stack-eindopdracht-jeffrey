@@ -1,8 +1,10 @@
 import styles from './PopUpWindow.module.css'
 import React, {useEffect, useState} from "react";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useParams} from 'react-router-dom';
 import Button from "../Buttons/Button";
+import InputField from "../InputField/InputField";
 
 // TO DO!!!!
 //inputfield maken waar nieuwe waarde van price, shopename en comment in opgeslagen kan worden.
@@ -12,31 +14,32 @@ import Button from "../Buttons/Button";
 
 
 function PopUpWindow({modalClose, setModalClose, oneImage, object}) {
+
+    const { handleSubmit, register, formState:{errors} } = useForm({
+        mode: 'onChange'
+    })
+
     const [image, setImage] = useState({});
     const [shopeName, setShopName] = useState('');
     const [price, setPrice] = useState();
     const [comment, setComment] = useState('');
 
 
-    async function productData(sendData) {
-        const data = {
-            price: price,
-            shopeName: shopeName,
-            comment: comment,
+    async function addData (updateData) {
+        // http://localhost:8080/api/product${id}
+        try{
+            await axios.patch(`${object.uploadedFile.url}`,
+                updateData,
+                {
+                    headers: {
+                        'content-type': 'application/json',
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    }
+                })
+            console.log('change Photo!!!',updateData)
+        } catch (e) {
+            console.error(e)
         }
-    try {
-
-        await axios.post(`${object.uploadedFile.url}`, data).then(res => {
-
-            setShopName('')
-            setComment('')
-        })
-
-        // Post request voor price, shopname en comments
-
-    } catch (e) {
-        console.error(e)
-    }
     }
 
 // Bij price: krijgt waarde binnen als interger, misschien moet het float zijn.
@@ -45,18 +48,40 @@ function PopUpWindow({modalClose, setModalClose, oneImage, object}) {
             <div className={styles.overAllSize}>
                 {console.log('wat zit hier in', object)}
                 {modalClose ? (
-                <div className={styles.popupForm}>
+                <form className={styles.popupForm} onSubmit={handleSubmit(addData)}>
                     {image && <img className={styles.image} alt='Image' src={object.uploadedFile.url}/>}
                     <p>{price}</p>
-                    <input placeholder='Prijs' type='number' value={price} onChange={e => setPrice(e.target.value.parseInt)} />
+                    <InputField
+                        type='number'
+                        name='price'
+                        placeholder='Prijs'
+                        fieldRef={register('price',
+                            {
+                                required: {
+                                    value: false,}})}
+                        errors={errors}
+                    />
+
                     <p>{shopeName}</p>
-                    <input placeholder='Naam winkel' type='text' value={shopeName} onChange={e => setShopName(e.target.value)} />
+                    <InputField
+                        type='text'
+                        name='shopName'
+                        placeholder='Winkel'
+                        fieldRef={register('shopName',
+                            {
+                                required: {
+                                    value: false,}})}
+                        errors={errors}
+                    />
+
                     <p>{comment}</p>
-                    <input placeholder='Opmerking' type='text' value={comment} onChange={e => setComment(e.target.value)}/>
+                    <textarea className={styles.commentArea}
+                    cols='20' rows='10'
+                    />
+
                     <Button
                     type='submit'
                     name='save'
-                    onClick={productData}
                     title='Save'
                     />
                     <Button
@@ -65,7 +90,7 @@ function PopUpWindow({modalClose, setModalClose, oneImage, object}) {
                     onclick={() => setModalClose(prev => !prev)}
                     title='Close'
                     />
-                </div> ) : null}
+                </form> ) : null}
             </div>
     );
 }

@@ -36,7 +36,7 @@ h3 {
 }
 
 .profileButtons {
-    position: absolute;
+    margin-top: 70px;
     display: flex;
     flex-direction: column;
     justify-self: flex-start;

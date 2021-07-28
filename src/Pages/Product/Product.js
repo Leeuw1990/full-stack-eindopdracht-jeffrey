@@ -69,7 +69,7 @@ function Product() {
                                        {/*    setModalClose(true)*/}
                                        {/*    }}*/}
                                        {/*/>*/}
-                                {console.log(activeObject)}
+                                {console.log('activeobj',activeObject)}
                             </div>
                         })}
 

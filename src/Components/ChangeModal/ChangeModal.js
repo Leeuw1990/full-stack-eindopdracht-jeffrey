@@ -34,8 +34,8 @@ function ChangeModal({ openChangeModal, setOpenChangeModal }) {
     }
 
     useEffect(() => {
-
-    },[changeData, user])
+        changeData();
+    },[user])
 
     return(
         (openChangeModal ? <div className={styles.modal}>
