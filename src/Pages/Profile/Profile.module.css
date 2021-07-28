@@ -10,20 +10,29 @@
 }
 
 .profileHeader {
-    margin-top: 50px;
     margin-bottom: 25px;
 }
 
 h3 {
     margin-bottom: 10px;
+}
 
-
+.title {
+    margin-top: 50px;
 }
 
 .userDetails {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border: solid #707070 3px;
+    border-radius: 25px;
+    width: 275px;
+    height: 200px;
+    justify-content: center;
+    text-align: start;
+
 }
 
 .profileButtons {

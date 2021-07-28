@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './ChangeModal.module.css';
 import Button from "../Buttons/Button";
@@ -7,11 +7,14 @@ import axios from 'axios';
 import InputField from "../InputField/InputField";
 
 function ChangeModal({ openChangeModal, setOpenChangeModal }) {
-    const { watch, handleSubmit, register, formState:{errors} } = useForm({
+    const { handleSubmit, register, formState:{errors} } = useForm({
         mode: 'onChange'
     })
     const { user } = useContext(AuthContext);
     console.log(user)
+
+
+
 
     async function changeData (updateData) {
         
@@ -24,14 +27,19 @@ function ChangeModal({ openChangeModal, setOpenChangeModal }) {
                         Authorization: `Bearer ${user.token}`,
                     }
             })
+            console.log('change!!!',updateData)
         } catch (e) {
             console.error(e)
         }
     }
 
+    useEffect(() => {
+
+    },[changeData, user])
+
     return(
         (openChangeModal ? <div className={styles.modal}>
-                <form onSubmit={handleSubmit(changeData)}>
+                <form className={styles.changeForm} onSubmit={handleSubmit(changeData)}>
                 <h2>Gebruiker gegevens:</h2>
                 <h3><strong>Voornaam:</strong>{user && user.firstName}</h3>
                 <InputField
@@ -81,18 +89,20 @@ function ChangeModal({ openChangeModal, setOpenChangeModal }) {
                                 message: 'E-mailadres voldoet niet aan de vereiste karakters.'}})}
                     errors={errors}
                 />
-            <Button
-            type='button'
-            name='close'
-            title='Opslaan'
-            />
+                    <Button
+                        type='submit'
+                        name='save'
+                        title='Opslaan'
+                    />
         </form>
+            <div className={styles.buttonGoBack}>
             <Button
                 type='button'
                 name='close'
                 title='Profiel'
                 onclick={()=> setOpenChangeModal(prev => !prev)}
             />
+            </div>
             </div> : null )
     );
 }

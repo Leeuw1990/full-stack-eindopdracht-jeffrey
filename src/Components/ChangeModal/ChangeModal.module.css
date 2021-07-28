@@ -5,11 +5,20 @@
     height: 600px;
     width: 315px;
     background-color: hsl(0, 0%, 87%);
+    position: absolute;
+    z-index: 1000;
+    top: 150px;
+}
+
+.changeForm {
+    margin-top: 90px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    z-index: 1000;
-    top: 150px;
+}
+
+.buttonGoBack {
+    display: flex;
+    justify-content: center;
 }

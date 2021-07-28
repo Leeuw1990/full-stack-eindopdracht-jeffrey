@@ -5,8 +5,6 @@ import { AuthContext } from "../../Context/AuthContext";
 import Button from "../../Components/Buttons/Button";
 import ChangeModal from "../../Components/ChangeModal/ChangeModal";
 
-
-
 function Profile() {
     const [openChangeModal, setOpenChangeModal] = useState(false);
     const {user, logout} = useContext(AuthContext);
@@ -15,7 +13,7 @@ function Profile() {
     return(
         <div className={styles.overAllSize}>
             <div className={styles.profileStyle}>
-                <h1>Profiel</h1>
+                <h1 className={styles.title}>Profiel</h1>
 
                 <div className={styles.userDetails}>
                     <h2 className={styles.profileHeader}>Gebruiker gegevens:</h2>

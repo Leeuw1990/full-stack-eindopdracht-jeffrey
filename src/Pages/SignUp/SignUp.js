@@ -55,7 +55,6 @@ function SignUp() {
                                 message: 'Achternaam is verplicht',}})}
                     errors={errors}
                 />
-
                 <InputField
                     type='text'
                     name='username'
