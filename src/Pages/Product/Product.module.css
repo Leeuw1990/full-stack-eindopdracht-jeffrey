@@ -25,7 +25,6 @@
 }
 
 .content {
-    /*padding: 8px 12px;*/
     float: left;
     height: 95px;
     width: 95px;
@@ -57,29 +56,12 @@
     width: 315px;
 }
 
-.handle {
-    display: flex;
-    width: 95px;
-    height: 95px;
-    background-color: transparent;
-    overflow: hidden;
-    cursor: grab;
-    position: absolute;
-    z-index: 2;
-}
 
 .resize {
     height: 50px;
     width: 50px;
 }
 
-.iconEye {
-    display: flex;
-    z-index: 3;
-    color: black;
-    position: absolute;
-    font-size: 35px;
-}
 
 .overAllSize {
     border: solid;

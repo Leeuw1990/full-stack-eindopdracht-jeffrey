@@ -9,6 +9,17 @@
     align-items: center;
 }
 
+.profileHeader {
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+h3 {
+    margin-bottom: 10px;
+
+
+}
+
 .userDetails {
     display: flex;
     flex-direction: column;
@@ -21,24 +32,6 @@
     flex-direction: column;
     justify-self: flex-start;
     bottom: 175px;
-}
-
-.profileSizeImage {
-    border-color: black;
-    height: 200px;
-    width: 150px;
-}
-
-.photoFieldSet {
-    margin-top: 10px;
-    display: flex;
-    border-color: black;
-    border-width:3px;
-    border-radius: 10px;
-    height: 205px;
-    width: 155px;
-    justify-content: center;
-    align-items: center;
 }
 
 .overAllSize {

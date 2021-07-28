@@ -1,13 +1,15 @@
 import styles from './Profile.module.css'
 import { Link } from 'react-router-dom';
-import React, { useContext} from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from "../../Context/AuthContext";
 import Button from "../../Components/Buttons/Button";
+import ChangeModal from "../../Components/ChangeModal/ChangeModal";
 
 
 
 function Profile() {
-    const {user, logout} = useContext(AuthContext)
+    const [openChangeModal, setOpenChangeModal] = useState(false);
+    const {user, logout} = useContext(AuthContext);
     console.log('Profile', user)
 
     return(
@@ -16,12 +18,24 @@ function Profile() {
                 <h1>Profiel</h1>
 
                 <div className={styles.userDetails}>
-            <h2>Gegevens:</h2>
-                    <p><strong>Voornaam:</strong>{user && user.firstName}</p>
-                    <p><strong>Achternaam:</strong>{user && user.lastName}</p>
-                    <p><strong>Gebruikersnaam:</strong>{user && user.username}</p>
-                    <p><strong>Email:</strong>{user && user.email}</p>
+                    <h2 className={styles.profileHeader}>Gebruiker gegevens:</h2>
+                    <h3><strong>Voornaam:</strong>{user && user.firstName}</h3>
+                    <h3><strong>Achternaam:</strong>{user && user.lastName}</h3>
+                    <h3><strong>Gebruikersnaam:</strong>{user && user.username}</h3>
+                    <h3><strong>Email:</strong>{user && user.email}</h3>
                 </div>
+
+                <Button
+                type='button'
+                name='editProfile'
+                title='Gegevens wijzigen'
+                onclick={() => setOpenChangeModal(true)}
+                />
+
+                {openChangeModal ? <ChangeModal
+                openChangeModal={openChangeModal}
+                setOpenChangeModal={setOpenChangeModal}
+                /> : null}
 
                 <div className={styles.profileButtons}>
                 <Link to='/productlist'>

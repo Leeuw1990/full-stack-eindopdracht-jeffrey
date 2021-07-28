@@ -1,11 +1,10 @@
-import styles from './Product.module.css'
+import styles from './Product.module.css';
 import React, { useState, useEffect } from 'react';
-import {Link, Route, useParams, useHistory} from 'react-router-dom'
-import { FaRegEye } from 'react-icons/fa'
-import Button from "../../Components/Buttons/Button";
-import ProductUploadService from "../../service/ProductUploadService";
-import UploadService from "../../service/UploadService";
-import PopUpWindow from "../../Components/PopUpWindow/PopUpWindow";
+import {Link, useHistory} from 'react-router-dom';
+import Button from '../../Components/Buttons/Button';
+import ProductUploadService from '../../service/ProductUploadService';
+import UploadService from '../../service/UploadService';
+import PopUpWindow from '../../Components/PopUpWindow/PopUpWindow';
 
 function Product() {
 
@@ -19,11 +18,9 @@ function Product() {
 
     const history = useHistory();
 
-
     function selectFile(event) {
         setSelectedFiles(event.target.files)
     }
-
 
     async function uploadImage() {
         setProgress(0);
@@ -59,7 +56,6 @@ function Product() {
             <div className={styles.productForm}>
                 <div className={styles.container}>
                     <div>
-
                         {uploadedFiles.length > 0 && uploadedFiles.map((uploadedFile, index) => {
                             return <div key={index}><img className={styles.pictureSize} src={uploadedFile.url} alt="hoi" key={index}
                                                                                       onClick={() => {
@@ -74,8 +70,6 @@ function Product() {
                                        {/*    }}*/}
                                        {/*/>*/}
                                 {console.log(activeObject)}
-
-
                             </div>
                         })}
 

@@ -2,6 +2,7 @@ import styles from './PopUpWindow.module.css'
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import { useParams} from 'react-router-dom';
+import Button from "../Buttons/Button";
 
 // TO DO!!!!
 //inputfield maken waar nieuwe waarde van price, shopename en comment in opgeslagen kan worden.
@@ -17,33 +18,11 @@ function PopUpWindow({modalClose, setModalClose, oneImage, object}) {
     const [comment, setComment] = useState('');
 
 
-// useEffect(() => {
-//     async function oneProduct() {
-//         try {
-//             const response = await axios.get(`${oneImage}`,{
-//
-//             })
-//             setImage(response)
-//
-//
-//
-//         } catch (e) {
-//             console.error(e)
-//         }
-//
-//     }
-//     oneProduct()
-// },[])
-
-
-
-
     async function productData(sendData) {
         const data = {
             price: price,
             shopeName: shopeName,
             comment: comment,
-
         }
     try {
 
@@ -52,9 +31,6 @@ function PopUpWindow({modalClose, setModalClose, oneImage, object}) {
             setShopName('')
             setComment('')
         })
-
-
-
 
         // Post request voor price, shopname en comments
 
@@ -66,7 +42,7 @@ function PopUpWindow({modalClose, setModalClose, oneImage, object}) {
 // Bij price: krijgt waarde binnen als interger, misschien moet het float zijn.
     console.log(comment)
         return (
-            <>
+            <div className={styles.overAllSize}>
                 {console.log('wat zit hier in', object)}
                 {modalClose ? (
                 <div className={styles.popupForm}>
@@ -77,10 +53,20 @@ function PopUpWindow({modalClose, setModalClose, oneImage, object}) {
                     <input placeholder='Naam winkel' type='text' value={shopeName} onChange={e => setShopName(e.target.value)} />
                     <p>{comment}</p>
                     <input placeholder='Opmerking' type='text' value={comment} onChange={e => setComment(e.target.value)}/>
-                    <button onClick={productData}>save</button>
-                    <button onClick={() => setModalClose(prev => !prev)} >Close</button>
+                    <Button
+                    type='submit'
+                    name='save'
+                    onClick={productData}
+                    title='Save'
+                    />
+                    <Button
+                    type='click'
+                    name='Close'
+                    onclick={() => setModalClose(prev => !prev)}
+                    title='Close'
+                    />
                 </div> ) : null}
-            </>
+            </div>
     );
 }
 
