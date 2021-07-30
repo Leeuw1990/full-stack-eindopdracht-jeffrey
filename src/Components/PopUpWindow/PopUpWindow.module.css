@@ -14,9 +14,13 @@
 }
 
 .image {
-    width: 275px;
-    height: 200px;
+    width: 250px;
+    height: 275px;
     top: 100px;
+}
+
+.imageFrame {
+    border: solid #707070 3px;
 }
 
 .commentArea {

@@ -24,6 +24,11 @@
     box-shadow: 1px 2px 0px 0px black;
 }
 
+.inputFile {
+    position: absolute;
+    z-index: -1;
+}
+
 .content {
     float: left;
     height: 95px;
@@ -39,11 +44,8 @@
 
 
 .StyledContainer {
-    /*border: solid green;*/
     display: inline-block;
     background-color: #ddd;
-    /*margin-left: 8px;*/
-    /*margin-right: 8px;*/
     white-space: nowrap;
     height: 500px;
     width: 315px;
@@ -51,9 +53,11 @@
 
 
 .container {
-    /*border: solid red;*/
+    display: flex;
     height: 440px;
     width: 315px;
+    overflow: auto;
+    flex-direction: column;
 }
 
 

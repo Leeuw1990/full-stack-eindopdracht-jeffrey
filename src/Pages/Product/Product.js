@@ -62,13 +62,6 @@ function Product() {
                                                                                           setActiveObject({index, uploadedFile});
                                                                                           setModalClose(true)
                                                                                       }}/>
-                                       {/*<FaRegEye*/}
-                                       {/*    key={index}*/}
-                                       {/*    onClick={() => {*/}
-                                       {/*    setActiveObject({index, uploadedFile});*/}
-                                       {/*    setModalClose(true)*/}
-                                       {/*    }}*/}
-                                       {/*/>*/}
                                 {console.log('activeobj',activeObject)}
                             </div>
                         })}
@@ -80,15 +73,7 @@ function Product() {
                             setModalClose={setModalClose}/> : null}
                     </div>
 
-                    <label>
-                        <input type="file" onChange={selectFile} />
-                    </label>
 
-                    <button disabled={!selectedFiles}
-                            onClick={uploadImage}
-                    >
-                        Upload
-                    </button>
                 </div>
                 <Link to='/productlist'>
                     <Button
@@ -97,21 +82,16 @@ function Product() {
                         title='My lists'
                     />
                 </Link>
-                {/*<Route*/}
-                {/*    path={`${this.props.match.url}/modal`}*/}
-                {/*    render={() => {*/}
-                {/*        return (*/}
-                {/*            <PopUpWindow*/}
-                {/*            onClick={() => {*/}
-                {/*                this.props.history.push(this.props.match.url)*/}
-                {/*            }}*/}
-                {/*            >*/}
+                <label className={styles.uploadButtonStyle}>
+                    <input className={styles.inputFile} type="file" onChange={selectFile} />Upload
+                </label>
 
-                {/*            </PopUpWindow>*/}
-
-                        );
-                    {/*}}*/}
-                    {/*/>*/}
+                <button
+                    disabled={!selectedFiles}
+                    onClick={uploadImage}
+                >
+                    Upload
+                </button>
             </div>
         </div>
     );

@@ -4,6 +4,8 @@ import styles from './InputField.module.css'
 
 function InputField({type,name,placeholder, fieldRef, errors}) {
 
+
+
     return (
         <>
             <label htmlFor={name}>

@@ -19,13 +19,11 @@ function ListForm() {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
             })
-
         } catch (e) {
             console.error(e)
         }
                 toggleLoading(false);
     }
-
 
     return(
         <div>

@@ -2,10 +2,14 @@ import React, {useState, useEffect} from 'react';
 import styles from './List.module.css';
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function List() {
     const [listsData, setListsdata] = useState([]);
+    const [page, setPage] = useState(0);
     const history = useHistory();
+
+
 
 
     useEffect(()=>  {
@@ -18,13 +22,10 @@ function List() {
                 },
             }).then()
             setListsdata(response.data)
-
-
         } catch (e) {
             console.error(e)
         }
     }
-
         fetchData()
 }, [])
 
@@ -44,20 +45,23 @@ function List() {
             console.error(e)
         }
     }
-
-    return listsData.length > 0 && listsData.map((name, index) => (
-        <div key={index}>
-            <div className={styles.icon}>
-                <div className={styles.listText} key={index} onClick={() => history.push(`/product/${name.id}`)} >
-                    {name.listName}
+    return <div className={styles.infiniteScroll}>
+        {
+        listsData.length > 0 && listsData.map((name, index) => (
+            <div key={index}>
+                <div className={styles.icon}>
+                    <div className={styles.listText} key={index} onClick={() => history.push(`/product/${name.id}`)}>
+                        {name.listName}
+                    </div>
+                    <div onClick={() => deleteData(name.id)}
+                         className='deleteIcon'
+                    >Remove
+                    </div>
+                    {console.log('DELETE!!!!', name.id)}
                 </div>
-                <div onClick={() => deleteData(name.id)}
-                className='deleteIcon'
-                >Remove</div>
-                {console.log('DELETE!!!!', name.id)}
-             </div>
-        </div>
-        ));
+            </div>
+        ))}
+            </div>
 }
 
 export default List;

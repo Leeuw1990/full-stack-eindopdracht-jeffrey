@@ -19,12 +19,6 @@ function PopUpWindow({modalClose, setModalClose, oneImage, object}) {
         mode: 'onChange'
     })
 
-    const [image, setImage] = useState({});
-    const [shopeName, setShopName] = useState('');
-    const [price, setPrice] = useState();
-    const [comment, setComment] = useState('');
-
-
     async function addData (updateData) {
         // http://localhost:8080/api/product${id}
         try{
@@ -43,14 +37,14 @@ function PopUpWindow({modalClose, setModalClose, oneImage, object}) {
     }
 
 // Bij price: krijgt waarde binnen als interger, misschien moet het float zijn.
-    console.log(comment)
         return (
             <div className={styles.overAllSize}>
                 {console.log('wat zit hier in', object)}
                 {modalClose ? (
                 <form className={styles.popupForm} onSubmit={handleSubmit(addData)}>
-                    {image && <img className={styles.image} alt='Image' src={object.uploadedFile.url}/>}
-                    <p>{price}</p>
+                    <div className={styles.imageFrame}>
+                    {object && <img className={styles.image} alt='Image' src={object.uploadedFile.url}/>}
+                    </div>
                     <InputField
                         type='number'
                         name='price'
@@ -61,8 +55,6 @@ function PopUpWindow({modalClose, setModalClose, oneImage, object}) {
                                     value: false,}})}
                         errors={errors}
                     />
-
-                    <p>{shopeName}</p>
                     <InputField
                         type='text'
                         name='shopName'
@@ -73,12 +65,9 @@ function PopUpWindow({modalClose, setModalClose, oneImage, object}) {
                                     value: false,}})}
                         errors={errors}
                     />
-
-                    <p>{comment}</p>
                     <textarea className={styles.commentArea}
                     cols='20' rows='10'
                     />
-
                     <Button
                     type='submit'
                     name='save'
