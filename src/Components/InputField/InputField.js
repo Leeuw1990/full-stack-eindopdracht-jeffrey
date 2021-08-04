@@ -2,7 +2,7 @@ import React from "react";
 import styles from './InputField.module.css'
 
 
-function InputField({type,name,placeholder, fieldRef, errors}) {
+function InputField({type,name,placeholder, fieldRef, errors, step}) {
 
 
 
@@ -11,6 +11,7 @@ function InputField({type,name,placeholder, fieldRef, errors}) {
             <label htmlFor={name}>
                 <input
                     className={styles.inputField}
+                    step={step}
                     type={type}
                     name={name}
                     id={name}

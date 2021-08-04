@@ -2,15 +2,11 @@ import React, {useState, useEffect} from 'react';
 import styles from './List.module.css';
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
-import InfiniteScroll from "react-infinite-scroll-component";
+
 
 function List() {
     const [listsData, setListsdata] = useState([]);
-    const [page, setPage] = useState(0);
     const history = useHistory();
-
-
-
 
     useEffect(()=>  {
     async function fetchData() {
@@ -20,7 +16,7 @@ function List() {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
-            }).then()
+            })
             setListsdata(response.data)
         } catch (e) {
             console.error(e)
@@ -28,6 +24,8 @@ function List() {
     }
         fetchData()
 }, [])
+
+
 
 
     async function deleteData(listId) {

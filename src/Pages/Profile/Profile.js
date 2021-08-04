@@ -1,13 +1,13 @@
 import styles from './Profile.module.css'
 import { Link } from 'react-router-dom';
-import React, { useContext, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { AuthContext } from "../../Context/AuthContext";
 import Button from "../../Components/Buttons/Button";
 import ChangeModal from "../../Components/ChangeModal/ChangeModal";
 
 function Profile() {
-    const [openChangeModal, setOpenChangeModal] = useState(false);
     const {user, logout} = useContext(AuthContext);
+    const [openChangeModal, setOpenChangeModal] = useState(false);
     console.log('Profile', user)
 
     return(

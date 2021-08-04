@@ -7,7 +7,7 @@ import InputField from "../InputField/InputField";
 function ListForm() {
 
     const [loading, toggleLoading] = useState(false);
-    const { handleSubmit,register, formState:{errors} } = useForm({
+    const { handleSubmit, register ,formState:{errors} } = useForm({
         mode: "onSubmit"
     });
 
@@ -24,6 +24,8 @@ function ListForm() {
         }
                 toggleLoading(false);
     }
+
+
 
     return(
         <div>

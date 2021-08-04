@@ -1,44 +1,39 @@
 import styles from './PopUpWindow.module.css'
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useParams} from 'react-router-dom';
 import Button from "../Buttons/Button";
 import InputField from "../InputField/InputField";
 
-// TO DO!!!!
-//inputfield maken waar nieuwe waarde van price, shopename en comment in opgeslagen kan worden.
-// Delete functie maken.
-// Edit functie.
-// Star rating toevoegen?
-
-
-function PopUpWindow({modalClose, setModalClose, oneImage, object}) {
+function PopUpWindow({modalClose, setModalClose, object}) {
+    const [errorMessage, toggleErrorMessage] = useState(false);
+    const [message, toggleMessage] = useState(false);
 
     const { handleSubmit, register, formState:{errors} } = useForm({
         mode: 'onChange'
     })
 
     async function addData (updateData) {
-        // http://localhost:8080/api/product${id}
         try{
             await axios.patch(`${object.uploadedFile.url}`,
                 updateData,
                 {
                     headers: {
+                        "access-control-allow-origin" : "*",
                         'content-type': 'application/json',
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     }
                 })
+            toggleMessage(true)
+
             console.log('change Photo!!!',updateData)
         } catch (e) {
-            console.error(e)
+            toggleErrorMessage(true)
         }
     }
 
-// Bij price: krijgt waarde binnen als interger, misschien moet het float zijn.
         return (
-            <div className={styles.overAllSize}>
+            <div>
                 {console.log('wat zit hier in', object)}
                 {modalClose ? (
                 <form className={styles.popupForm} onSubmit={handleSubmit(addData)}>
@@ -47,6 +42,7 @@ function PopUpWindow({modalClose, setModalClose, oneImage, object}) {
                     </div>
                     <InputField
                         type='number'
+                        step='0.01'
                         name='price'
                         placeholder='Prijs'
                         fieldRef={register('price',
@@ -65,7 +61,7 @@ function PopUpWindow({modalClose, setModalClose, oneImage, object}) {
                                     value: false,}})}
                         errors={errors}
                     />
-                    <textarea className={styles.commentArea}
+                    <textarea {...register('comment')} className={styles.commentArea} name='comment' id='comment'
                     cols='20' rows='10'
                     />
                     <Button
@@ -79,6 +75,8 @@ function PopUpWindow({modalClose, setModalClose, oneImage, object}) {
                     onclick={() => setModalClose(prev => !prev)}
                     title='Close'
                     />
+                    {message && <p>Comments added!</p>}
+                    {errorMessage && <p>Comments denied!</p>}
                 </form> ) : null}
             </div>
     );

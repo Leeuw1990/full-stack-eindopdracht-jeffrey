@@ -22,6 +22,7 @@
     align-items: center;
     justify-content: center;
     box-shadow: 1px 2px 0px 0px black;
+    font-size: 13px;
 }
 
 .inputFile {
@@ -54,18 +55,19 @@
 
 .container {
     display: flex;
-    height: 440px;
+    height: 400px;
     width: 315px;
     overflow: auto;
     flex-direction: column;
+    margin-bottom: 5px;
+    position: relative;
+    top: 45px;
 }
-
 
 .resize {
     height: 50px;
     width: 50px;
 }
-
 
 .overAllSize {
     border: solid;
@@ -75,5 +77,38 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.pictureElement {
+    margin: 5px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    background-color: #707070;
+    box-shadow: 1px 2px 1px 0px black;
+}
+
+.picProperties {
+    display: flex;
+    flex-direction: row;
+}
+
+ul {
+    list-style-type: none;
+    line-height: 25px;
+}
+
+.sortButtons {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    left: 135px;
+    top: -50px;
+}
+
+.buttons {
+    position: relative;
+    top: 50px;
 }
 

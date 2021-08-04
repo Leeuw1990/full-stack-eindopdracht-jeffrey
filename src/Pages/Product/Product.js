@@ -5,51 +5,65 @@ import Button from '../../Components/Buttons/Button';
 import ProductUploadService from '../../service/ProductUploadService';
 import UploadService from '../../service/UploadService';
 import PopUpWindow from '../../Components/PopUpWindow/PopUpWindow';
+import { GoTriangleUp, GoTriangleDown } from 'react-icons/go';
+
+
 
 function Product() {
 
     const [uploadedFiles, setUploadedFiles] = useState([]);
-    const [progress, setProgress] = useState(0);
     const [selectedFiles, setSelectedFiles] = useState(undefined);
-
+    const [errorMessage, toggleErrorMessage] = useState(false);
+    const [message, toggleMessage] = useState(false);
     const [modalClose, setModalClose] = useState(false);
     const [activeObject, setActiveObject] = useState(null);
-    const [activeImage, setActiveImage] = useState(undefined);
 
-    const history = useHistory();
 
     function selectFile(event) {
         setSelectedFiles(event.target.files)
     }
 
     async function uploadImage() {
-        setProgress(0);
         const currentFile = selectedFiles[0];
 
         try {
-            // AFBEELDING UPLOADEN
             const response = await ProductUploadService.upload(currentFile, (event) => {
-                setProgress(Math.round((100 * event.loaded) / event.total));
             });
+            toggleMessage(true)
 
-
-            // @todo: communiceer met de gebruiker response.data.message
-
-            // ALLE AFBEELDINGEN OPHALEN
             const allFiles = await ProductUploadService.getFiles();
             setUploadedFiles(allFiles.data);
         } catch (e) {
-            setProgress(0);
-            // @todo: communiceer met de gebruiker dat er een error is
+            toggleErrorMessage(true);
         }
     }
 
     useEffect(() => {
         UploadService.getFiles().then((response) => {
             setUploadedFiles(response.data)
+
         });
     },[]);
 
+    function sortPriceAsc() {
+       const products = [...uploadedFiles].sort((a,b) => {
+           if (a.price < b.price) {
+               return -1
+           }
+           return 0;
+       })
+        setUploadedFiles(products)
+    }
+
+    function sortPriceDesc() {
+        const products = [...uploadedFiles].sort((a,b) => {
+            if (a.price > b.price) {
+                return -1
+            }
+            return 0;
+        })
+        setUploadedFiles(products)
+    }
 
     return(
         <div className={styles.overAllSize}>
@@ -57,24 +71,36 @@ function Product() {
                 <div className={styles.container}>
                     <div>
                         {uploadedFiles.length > 0 && uploadedFiles.map((uploadedFile, index) => {
-                            return <div key={index}><img className={styles.pictureSize} src={uploadedFile.url} alt="hoi" key={index}
-                                                                                      onClick={() => {
-                                                                                          setActiveObject({index, uploadedFile});
-                                                                                          setModalClose(true)
-                                                                                      }}/>
-                                {console.log('activeobj',activeObject)}
+                            return <div className={styles.pictureElement} key={index}>
+                                <img className={styles.pictureSize} src={uploadedFile.url} alt="hoi" key={index}
+                                     onClick={() => {
+                                     setActiveObject({index, uploadedFile});
+                                     setModalClose(true)
+                                     }}/>
+                                     <div className={styles.picProperties}>
+                                         <ul>
+                                {uploadedFile.price && <li>Prijs: €{uploadedFile.price}</li>}
+                                {uploadedFile.shopName && <li>Winkel: {uploadedFile.shopName}</li>}
+                                {uploadedFile.comment && <li>Opmerkingen: {uploadedFile.comment}</li>}
+                                {/*{console.log('activeobj',activeObject)}*/}
+                                {console.log('wat zit er in file', uploadedFile)}
+                                         </ul>
+                                     </div>
                             </div>
                         })}
 
-                        { modalClose ? <PopUpWindow
-                            oneImage={activeObject}
-                            object={activeObject}
-                            modalClose={modalClose}
-                            setModalClose={setModalClose}/> : null}
+
                     </div>
 
-
                 </div>
+                { modalClose ? <PopUpWindow
+                    oneImage={activeObject}
+                    object={activeObject}
+                    modalClose={modalClose}
+                    setModalClose={setModalClose}
+                    setUploadedFiles={setUploadedFiles}/> : null}
+
+                <div className={styles.buttons}>
                 <Link to='/productlist'>
                     <Button
                         type='button'
@@ -87,11 +113,19 @@ function Product() {
                 </label>
 
                 <button
+                    title='Confirm'
                     disabled={!selectedFiles}
                     onClick={uploadImage}
-                >
-                    Upload
-                </button>
+                />
+                </div>
+
+                <div className={styles.sortButtons}>
+                    <p>Price</p>
+                <GoTriangleUp size='25px' color='#707070' type='click'  onClick={sortPriceAsc} />
+                <GoTriangleDown size='25px' color='#707070' type='click' onClick={sortPriceDesc} />
+                </div>
+                {message && <p>Uploaded!</p>}
+                {errorMessage && <p>Something went wrong, Try again!</p>}
             </div>
         </div>
     );
