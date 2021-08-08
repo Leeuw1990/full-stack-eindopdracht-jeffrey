@@ -8,6 +8,7 @@ import ChangeModal from "../../Components/ChangeModal/ChangeModal";
 function Profile() {
     const {user, logout} = useContext(AuthContext);
     const [openChangeModal, setOpenChangeModal] = useState(false);
+
     console.log('Profile', user)
 
     return(

@@ -5,9 +5,6 @@ import Button from "../../Components/Buttons/Button";
 import ListForm from "../../Components/ListForm/ListForm";
 import List from "../../Components/List/List";
 
-
-
-
 function ProductList() {
     return(
 

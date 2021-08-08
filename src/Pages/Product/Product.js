@@ -91,14 +91,17 @@ function Product() {
 
 
                     </div>
-
                 </div>
                 { modalClose ? <PopUpWindow
                     oneImage={activeObject}
                     object={activeObject}
                     modalClose={modalClose}
                     setModalClose={setModalClose}
-                    setUploadedFiles={setUploadedFiles}/> : null}
+                    setUploadedFiles={setUploadedFiles}
+                    upLoadedFiles={uploadedFiles}
+                /> : null}
+
+                {console.log('rerender?', uploadedFiles)}
 
                 <div className={styles.buttons}>
                 <Link to='/productlist'>

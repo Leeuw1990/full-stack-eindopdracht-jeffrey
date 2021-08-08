@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import axios from "axios";
 
 
-function List() {
+function List({ children }) {
     const [listsData, setListsdata] = useState([]);
     const history = useHistory();
 

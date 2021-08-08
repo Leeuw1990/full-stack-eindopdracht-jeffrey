@@ -4,12 +4,17 @@ import styles from './ListForm.module.css'
 import axios from "axios";
 import InputField from "../InputField/InputField";
 
-function ListForm() {
+function ListForm({ children }) {
 
     const [loading, toggleLoading] = useState(false);
     const { handleSubmit, register ,formState:{errors} } = useForm({
         mode: "onSubmit"
     });
+
+
+    //Prettier plugin
+
+
 
     async function postData(data) {
                 toggleLoading(true);
@@ -19,6 +24,7 @@ function ListForm() {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
             })
+            await axios.get('http://localhost:8080/api/productlist')
         } catch (e) {
             console.error(e)
         }

@@ -1,24 +1,21 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './ChangeModal.module.css';
 import Button from "../Buttons/Button";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 import InputField from "../InputField/InputField";
 
 function ChangeModal({ openChangeModal, setOpenChangeModal }) {
-    let histroy = useHistory();
+
     const { handleSubmit, register, formState:{errors} } = useForm({
         mode: 'onChange'
     })
     const { user } = useContext(AuthContext);
     console.log(user)
 
-
     async function changeData (updateData) {
-        
-        try{
+                try{
             await axios.patch(`http://localhost:8080/api/users/user/${user.username}/details/update`,
                 updateData,
                 {
@@ -33,10 +30,6 @@ function ChangeModal({ openChangeModal, setOpenChangeModal }) {
             console.error(e)
         }
     }
-
-    // useEffect(() => {
-    //     changeData();
-    // },[user])
 
     return(
         (openChangeModal ? <div className={styles.modal}>

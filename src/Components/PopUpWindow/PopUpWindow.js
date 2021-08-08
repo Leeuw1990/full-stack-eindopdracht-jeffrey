@@ -4,18 +4,20 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Button from "../Buttons/Button";
 import InputField from "../InputField/InputField";
+import UploadService from "../../service/UploadService";
 
-function PopUpWindow({modalClose, setModalClose, object}) {
+function PopUpWindow({ modalClose, setModalClose, object, setUploadedFiles }) {
+
     const [errorMessage, toggleErrorMessage] = useState(false);
     const [message, toggleMessage] = useState(false);
-
-    const { handleSubmit, register, formState:{errors} } = useForm({
+    const { handleSubmit, register, formState:{ errors} } = useForm({
         mode: 'onChange'
     })
 
+
     async function addData (updateData) {
         try{
-            await axios.patch(`${object.uploadedFile.url}`,
+            const response = await axios.patch(`${object.uploadedFile.url}`,
                 updateData,
                 {
                     headers: {
@@ -24,9 +26,11 @@ function PopUpWindow({modalClose, setModalClose, object}) {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     }
                 })
+            UploadService.getFiles().then((response) => {
+                setUploadedFiles(response.data)
+            })
             toggleMessage(true)
-
-            console.log('change Photo!!!',updateData)
+            console.log('response!!!',response.config.data)
         } catch (e) {
             toggleErrorMessage(true)
         }
