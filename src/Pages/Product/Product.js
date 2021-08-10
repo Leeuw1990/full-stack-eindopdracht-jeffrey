@@ -4,7 +4,7 @@ import {Link, useHistory} from 'react-router-dom';
 import Button from '../../Components/Buttons/Button';
 import ProductUploadService from '../../service/ProductUploadService';
 import UploadService from '../../service/UploadService';
-import PopUpWindow from '../../Components/PopUpWindow/PopUpWindow';
+import ProductModal from '../../Components/ProductModal/ProductModal';
 import { GoTriangleUp, GoTriangleDown } from 'react-icons/go';
 
 
@@ -75,24 +75,21 @@ function Product() {
                                 <img className={styles.pictureSize} src={uploadedFile.url} alt="hoi" key={index}
                                      onClick={() => {
                                      setActiveObject({index, uploadedFile});
-                                     setModalClose(true)
+                                     setModalClose(true);
                                      }}/>
                                      <div className={styles.picProperties}>
                                          <ul>
                                 {uploadedFile.price && <li>Prijs: €{uploadedFile.price}</li>}
                                 {uploadedFile.shopName && <li>Winkel: {uploadedFile.shopName}</li>}
                                 {uploadedFile.comment && <li>Opmerkingen: {uploadedFile.comment}</li>}
-                                {/*{console.log('activeobj',activeObject)}*/}
                                 {console.log('wat zit er in file', uploadedFile)}
                                          </ul>
                                      </div>
                             </div>
                         })}
-
-
                     </div>
                 </div>
-                { modalClose ? <PopUpWindow
+                { modalClose ? <ProductModal
                     oneImage={activeObject}
                     object={activeObject}
                     modalClose={modalClose}
@@ -100,8 +97,6 @@ function Product() {
                     setUploadedFiles={setUploadedFiles}
                     upLoadedFiles={uploadedFiles}
                 /> : null}
-
-                {console.log('rerender?', uploadedFiles)}
 
                 <div className={styles.buttons}>
                 <Link to='/productlist'>

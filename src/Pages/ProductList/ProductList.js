@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ProductList.module.css'
 import Button from "../../Components/Buttons/Button";
-import ListForm from "../../Components/ListForm/ListForm";
 import List from "../../Components/List/List";
 
 function ProductList() {
@@ -17,7 +16,6 @@ function ProductList() {
                     title='Profile'
                 />
                 </Link>
-                <ListForm/>
                 <List/>
             </div>
       </div>

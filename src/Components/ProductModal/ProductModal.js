@@ -1,4 +1,4 @@
-import styles from './PopUpWindow.module.css'
+import styles from './ProductModal.module.css'
 import React, {useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -6,7 +6,7 @@ import Button from "../Buttons/Button";
 import InputField from "../InputField/InputField";
 import UploadService from "../../service/UploadService";
 
-function PopUpWindow({ modalClose, setModalClose, object, setUploadedFiles }) {
+function ProductModal({ modalClose, setModalClose, object, setUploadedFiles }) {
 
     const [errorMessage, toggleErrorMessage] = useState(false);
     const [message, toggleMessage] = useState(false);
@@ -86,4 +86,4 @@ function PopUpWindow({ modalClose, setModalClose, object, setUploadedFiles }) {
     );
 }
 
-export default PopUpWindow;
+export default ProductModal;

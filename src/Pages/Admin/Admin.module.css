@@ -1,0 +1,44 @@
+
+
+.overAllSize {
+    border: solid;
+    height: 650px;
+    width: 350px;
+    background: linear-gradient(hsl(222, 100%, 16%), hsl(243, 19%, 45%));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin {
+    border: solid #F4ECE5;
+    border-radius: 50px;
+    height: 600px;
+    width: 315px;
+    background-color: hsl(0, 0%, 87%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userDetail {
+    display: flex;
+    width: 250px;
+    height: 125px;
+    border: solid #707070;
+    border-radius: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px;
+    background-color: #707070;
+    color: #F4ECE5;
+    box-shadow: 1px 2px 0px 0px black;
+}
+
+.scroll {
+    display: flex;
+    height: 420px;
+    overflow: auto;
+    flex-direction: column;
+}

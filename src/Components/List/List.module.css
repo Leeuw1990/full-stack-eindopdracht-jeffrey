@@ -33,3 +33,53 @@
     border-radius: 10px;
 
 }
+
+.addListButton {
+    font-family: 'Zen Dots', cursive;
+    height: 40px;
+    width: 200px;
+    background-color: #707070;
+    color: #F4ECE5;
+    border-radius: 20px;
+    display: flex;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.addListInput {
+    font-family: 'Zen Dots', cursive;
+    height: 35px;
+    width: 200px;
+    border-radius: 20px;
+    display: flex;
+    margin: 10px;
+}
+
+.editListButton {
+    font-family: 'Zen Dots', cursive;
+    height: 40px;
+    width: 200px;
+    background-color: #707070;
+    color: #F4ECE5;
+    border-radius: 20px;
+    display: flex;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.EditListInput {
+    font-family: 'Zen Dots', cursive;
+    height: 35px;
+    width: 200px;
+    border-radius: 20px;
+    display: flex;
+    margin: 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

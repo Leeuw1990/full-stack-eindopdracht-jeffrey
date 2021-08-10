@@ -10,12 +10,12 @@ import SignUp from "./Pages/SignUp/SignUp";
 import SignIn from "./Pages/SignIn/SignIn";
 import Product from "./Pages/Product/Product";
 import ProductList from "./Pages/ProductList/ProductList";
-import PopUpWindow from "./Components/PopUpWindow/PopUpWindow";
+import ProductModal from "./Components/ProductModal/ProductModal";
+import Admin from "./Pages/Admin/Admin";
 
 
 
-function App({uploadedFiles}) {
-
+function App() {
 
   return (
       <div>
@@ -26,6 +26,9 @@ function App({uploadedFiles}) {
             </li>
             <li>
               <Link to="/list">lists</Link>
+            </li>
+            <li>
+              <Link to="/admin">admin</Link>
             </li>
           </ul>
         </nav>
@@ -43,12 +46,15 @@ function App({uploadedFiles}) {
           <Route exact path="/product/:id" component={Product}>
             <Product/>
           </Route>
-          <Route exact path="/modal/:url" component={PopUpWindow}>
-            <PopUpWindow />
+          <Route exact path="/modal/:url" component={ProductModal}>
+            <ProductModal />
           </Route>
           <Route exact path="/productlist">
             <ProductList />
           </Route>
+            <Route>
+              <Admin exact path='/admin'/>
+            </Route>
         </Switch>
         </div>
 
