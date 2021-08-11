@@ -12,6 +12,7 @@ import Product from "./Pages/Product/Product";
 import ProductList from "./Pages/ProductList/ProductList";
 import ProductModal from "./Components/ProductModal/ProductModal";
 import Admin from "./Pages/Admin/Admin";
+import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 
 
 
@@ -19,19 +20,19 @@ function App() {
 
   return (
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li>
-              <Link to="/list">lists</Link>
-            </li>
-            <li>
-              <Link to="/admin">admin</Link>
-            </li>
-          </ul>
-        </nav>
+        {/*<nav>*/}
+        {/*  <ul>*/}
+        {/*    <li>*/}
+        {/*      <Link to="/profile">Profile</Link>*/}
+        {/*    </li>*/}
+        {/*    <li>*/}
+        {/*      <Link to="/list">lists</Link>*/}
+        {/*    </li>*/}
+        {/*    <li>*/}
+        {/*      <Link to="/admin">admin</Link>*/}
+        {/*    </li>*/}
+        {/*  </ul>*/}
+        {/*</nav>*/}
 
         <Switch>
           <Route exact path="/">
@@ -52,9 +53,9 @@ function App() {
           <Route exact path="/productlist">
             <ProductList />
           </Route>
-            <Route>
+            <PrivateRoute>
               <Admin exact path='/admin'/>
-            </Route>
+            </PrivateRoute>
         </Switch>
         </div>
 

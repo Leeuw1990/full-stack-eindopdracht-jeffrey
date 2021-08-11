@@ -10,8 +10,8 @@
     justify-content: center;
     position: absolute;
     z-index: 1000;
-    top: 165px;
-    left: 435px;
+    top: 140px;
+    /*left: 435px;*/
 }
 
 .image {

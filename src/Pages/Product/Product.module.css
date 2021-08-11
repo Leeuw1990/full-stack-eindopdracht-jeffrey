@@ -52,6 +52,13 @@
     width: 315px;
 }
 
+.modalPosition {
+    display: inline-block;
+
+
+
+}
+
 
 .container {
     display: flex;

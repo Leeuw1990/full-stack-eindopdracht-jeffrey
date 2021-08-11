@@ -39,7 +39,7 @@ function UserChangeModal({ openModal, setOpenModal, activeObject, setUserData })
     return(
        ( openModal ? <div className={styles.userModal}>
 
-           <form className={styles.changeForm} onSubmit={handleSubmit(userChangeData)}>
+           <form className={styles.userChangeForm} onSubmit={handleSubmit(userChangeData)}>
                <h2>Gebruikersgegevens:</h2>
                {activeObject.users.firstName && <p>{activeObject.users.firstName}</p>}
                <InputField
@@ -94,13 +94,14 @@ function UserChangeModal({ openModal, setOpenModal, activeObject, setUserData })
                    name='save'
                    title='Opslaan'
                />
+               <Button
+                   type='button'
+                   name='close'
+                   title='Admin Dashboard'
+                   onclick={()=> setOpenModal(prev => !prev)}
+               />
            </form>
-           <Button
-               type='button'
-               name='close'
-               title='Admin Dashboard'
-               onclick={()=> setOpenModal(prev => !prev)}
-           />
+
             </div> : null)
     )
 }

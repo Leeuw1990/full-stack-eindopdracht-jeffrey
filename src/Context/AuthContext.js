@@ -22,11 +22,12 @@ function AuthContextProvider({children}) {
             })
         }
     },[])
-    async function loginFunction(jwtToken) {
 
+    async function loginFunction(jwtToken) {
         const decoded = jwt_decode(jwtToken)
         const userId = decoded.sub;
         localStorage.setItem('token', jwtToken)
+
         try {
             const result = await axios.get(`http://localhost:8080/api/users/user/${userId}`, {
                 headers: {
@@ -34,9 +35,11 @@ function AuthContextProvider({children}) {
                     "Authorization": `Bearer ${jwtToken}`,
                 }
             })
+            console.log(result, "authcontxt")
 
             setAuthState({
                 user: {
+                    role:result.data.roles,
                     email:result.data.email,
                     username:result.data.username,
                     password:result.data.password,
@@ -46,8 +49,8 @@ function AuthContextProvider({children}) {
                     id:result.data.id,
                 },
                 status: 'done',
-            });
 
+            });
             history.push("/profile");
 
         } catch (e) {
@@ -69,7 +72,6 @@ function AuthContextProvider({children}) {
             }
         )
         history.push("/");
-
     }
 
     return (

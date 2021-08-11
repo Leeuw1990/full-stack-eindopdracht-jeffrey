@@ -41,4 +41,5 @@
     height: 420px;
     overflow: auto;
     flex-direction: column;
+    margin-bottom: 50px;
 }

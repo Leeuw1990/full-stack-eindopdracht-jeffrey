@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styles from './Admin.module.css';
 import axios from 'axios';
 import UserChangeModal from "../../Components/UserChangeModal/UserChangeModal";
+import Button from "../../Components/Buttons/Button";
+import {Link} from "react-router-dom";
 
 function Admin() {
     const [userData, setUserData] = useState([]);
@@ -28,7 +30,6 @@ function Admin() {
     fetchUsers()
 
     },[])
-
 
 
     return(
@@ -59,6 +60,13 @@ function Admin() {
                     setUserData={setUserData}
                     />
                 : null}
+                <Link to='/profile'>
+                    <Button
+                        type='button'
+                        name='toList'
+                        title='Profile'
+                    />
+                </Link>
             </div>
             </div>
 
