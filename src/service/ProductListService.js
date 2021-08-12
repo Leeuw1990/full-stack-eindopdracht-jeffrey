@@ -1,24 +1,18 @@
-import http from '../http-common';
-import React from 'react';
+import http from "../http-common";
+import React from "react";
 
 class ProductListService {
+  createProductList(listName) {
+    let data = new data();
 
-    createProductList(listName) {
+    data.append("listName", listName);
 
-        let data = new data();
+    return http.post("api/productlist");
+  }
 
-        data.append('listName', listName)
-
-        return http.post('api/productlist')
-    }
-
-
-    getProductList() {
-        return http.get('api/productlist')
-    }
-
-
+  getProductList() {
+    return http.get("api/productlist");
+  }
 }
 
 export default ProductListService;
-

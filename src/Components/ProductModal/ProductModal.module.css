@@ -1,36 +1,42 @@
 .popupForm {
-    border: solid #F4ECE5;
-    border-radius: 50px;
-    height: 600px;
-    width: 315px;
-    background-color: hsl(0, 0%, 87%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    z-index: 1000;
-    top: 140px;
-    /*left: 435px;*/
+  border: solid #f4ece5;
+  border-radius: 50px;
+  height: 600px;
+  width: 315px;
+  background-color: hsl(0, 0%, 87%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 1000;
+  top: 140px;
+}
+
+.rating {
+  border-radius: 10px;
+  margin-top: 5px;
+  font-family: "Zen Dots", cursive;
+  font-size: 14px;
+  color: #707070;
 }
 
 .image {
-    width: 250px;
-    height: 275px;
-    top: 100px;
+  width: 225px;
+  height: 250px;
+  top: 100px;
 }
 
 .imageFrame {
-    border: solid #707070 3px;
+  border: solid #707070 3px;
 }
 
 .commentArea {
-    font-family: 'Zen Dots', cursive;
-    height: 125px;
-    width: 200px;
-    border-radius: 20px;
-    margin: 10px;
-    display: flex;
-    text-align: left;
+  font-family: "Zen Dots", cursive;
+  height: 125px;
+  width: 200px;
+  border-radius: 20px;
+  margin: 10px;
+  display: flex;
+  text-align: left;
 }
-

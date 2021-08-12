@@ -1,121 +1,124 @@
 .productForm {
-    border: solid #F4ECE5;
-    border-radius: 50px;
-    height: 600px;
-    width: 315px;
-    background-color: hsl(0, 0%, 87%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  border: solid #f4ece5;
+  border-radius: 50px;
+  height: 600px;
+  width: 315px;
+  background-color: hsl(0, 0%, 87%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .uploadButtonStyle {
-    font-family: 'Zen Dots', cursive;
-    margin-bottom: 10px;
-    display: flex;
-    width: 200px;
-    height: 40px;
-    border-radius: 20px;
-    background-color: #707070;
-    color: #F4ECE5;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 1px 2px 0px 0px black;
-    font-size: 13px;
+  font-family: "Zen Dots", cursive;
+  margin-bottom: 10px;
+  display: flex;
+  width: 200px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: #707070;
+  color: #f4ece5;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 1px 2px 0px 0px black;
+  font-size: 13px;
 }
 
 .inputFile {
-    position: absolute;
-    z-index: -1;
+  position: absolute;
+  z-index: -1;
 }
 
 .content {
-    float: left;
-    height: 95px;
-    width: 95px;
-    margin: 5px;
+  float: left;
+  height: 95px;
+  width: 95px;
+  margin: 5px;
 }
 
 .pictureSize {
-    height: 95px;
-    width: 95px;
-    padding: 5px;
+  height: 115px;
+  width: 95px;
+  padding: 5px;
 }
 
-
 .StyledContainer {
-    display: inline-block;
-    background-color: #ddd;
-    white-space: nowrap;
-    height: 500px;
-    width: 315px;
+  display: inline-block;
+  background-color: #ddd;
+  white-space: nowrap;
+  height: 500px;
+  width: 315px;
 }
 
 .modalPosition {
-    display: inline-block;
-
-
-
+  display: inline-block;
 }
 
-
 .container {
-    display: flex;
-    height: 400px;
-    width: 315px;
-    overflow: auto;
-    flex-direction: column;
-    margin-bottom: 5px;
-    position: relative;
-    top: 45px;
+  display: flex;
+  height: 400px;
+  width: 315px;
+  overflow: auto;
+  flex-direction: column;
+  margin-bottom: 5px;
+  position: relative;
+  top: 45px;
 }
 
 .resize {
-    height: 50px;
-    width: 50px;
+  height: 50px;
+  width: 50px;
 }
 
 .overAllSize {
-    border: solid;
-    height: 650px;
-    width: 350px;
-    background: linear-gradient(hsl(222, 100%, 16%), hsl(243, 19%, 45%));
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  border: solid;
+  height: 650px;
+  width: 350px;
+  background: linear-gradient(hsl(222, 100%, 16%), hsl(243, 19%, 45%));
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .pictureElement {
-    margin: 5px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: row;
-    background-color: #707070;
-    box-shadow: 1px 2px 1px 0px black;
+  margin: 5px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  background-color: #707070;
+  box-shadow: 1px 2px 1px 0px black;
 }
 
 .picProperties {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 ul {
-    list-style-type: none;
-    line-height: 25px;
+  list-style-type: none;
+  line-height: 25px;
 }
 
-.sortButtons {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    align-items: center;
-    left: 135px;
-    top: -50px;
+.sortButtonsPrice {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  left: 135px;
+  top: -50px;
+}
+
+.sortButtonsRating {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  right: 135px;
+  top: -115px;
 }
 
 .buttons {
-    position: relative;
-    top: 50px;
+  position: relative;
+  top: 50px;
 }
-

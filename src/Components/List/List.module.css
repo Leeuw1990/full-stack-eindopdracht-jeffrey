@@ -1,85 +1,84 @@
 .icon {
-    display: flex;
-    width: 250px;
-    height: 50px;
-    border: solid #707070;
-    border-radius: 10px;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    margin: 10px;
-    background-color: #707070;
-    color: #F4ECE5;
-    box-shadow: 1px 2px 0px 0px black;
+  display: flex;
+  width: 250px;
+  height: 50px;
+  border: solid #707070;
+  border-radius: 10px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin: 10px;
+  background-color: #707070;
+  color: #f4ece5;
+  box-shadow: 1px 2px 0px 0px black;
 }
 
 .infiniteScroll {
-    display: flex;
-    height: 420px;
-    overflow: auto;
-    flex-direction: column;
+  display: flex;
+  height: 420px;
+  overflow: auto;
+  flex-direction: column;
 }
 
 ::-webkit-scrollbar {
-    width: 3px;
+  width: 3px;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #F4ECE5;
-    border-radius: 10px;
-
+  background-color: #f4ece5;
+  border-radius: 10px;
 }
 
 .addListButton {
-    font-family: 'Zen Dots', cursive;
-    height: 40px;
-    width: 200px;
-    background-color: #707070;
-    color: #F4ECE5;
-    border-radius: 20px;
-    display: flex;
-    margin: 10px;
-    justify-content: center;
-    align-items: center;
+  font-family: "Zen Dots", cursive;
+  height: 40px;
+  width: 200px;
+  background-color: #707070;
+  color: #f4ece5;
+  border-radius: 20px;
+  display: flex;
+  margin: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .addListInput {
-    font-family: 'Zen Dots', cursive;
-    height: 35px;
-    width: 200px;
-    border-radius: 20px;
-    display: flex;
-    margin: 10px;
+  font-family: "Zen Dots", cursive;
+  height: 35px;
+  width: 200px;
+  border-radius: 20px;
+  display: flex;
+  margin: 10px;
 }
 
 .editListButton {
-    font-family: 'Zen Dots', cursive;
-    height: 40px;
-    width: 200px;
-    background-color: #707070;
-    color: #F4ECE5;
-    border-radius: 20px;
-    display: flex;
-    margin: 10px;
-    justify-content: center;
-    align-items: center;
+  font-family: "Zen Dots", cursive;
+  height: 40px;
+  width: 200px;
+  background-color: #707070;
+  color: #f4ece5;
+  border-radius: 20px;
+  display: flex;
+  margin: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .EditListInput {
-    font-family: 'Zen Dots', cursive;
-    height: 35px;
-    width: 200px;
-    border-radius: 20px;
-    display: flex;
-    margin: 10px;
+  font-family: "Zen Dots", cursive;
+  height: 35px;
+  width: 200px;
+  border-radius: 20px;
+  display: flex;
+  margin: 10px;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
