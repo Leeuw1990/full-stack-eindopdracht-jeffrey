@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./List.module.css";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 import InputField from "../InputField/InputField";
 import { useForm } from "react-hook-form";
 import ProductListService from "../../service/ProductListService";

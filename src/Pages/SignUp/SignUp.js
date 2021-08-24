@@ -110,17 +110,6 @@ function SignUp() {
             })}
             errors={errors}
           />
-          {/*<InputField*/}
-          {/*    type="password"*/}
-          {/*    name="repeatPass"*/}
-          {/*    placeholder="Herhaal wachtwoord"*/}
-          {/*    fieldRef={register("repeatPass",*/}
-          {/*        {*/}
-          {/*            validate: value =>*/}
-          {/*                value === password.current || "Wachtwoord komt niet overeen."*/}
-          {/*        })}*/}
-          {/*    errors={errors}*/}
-          {/*/>*/}
           <Button type="submit" name="signup" title="Sign up" />
           {registerSucces === true && (
             <p>

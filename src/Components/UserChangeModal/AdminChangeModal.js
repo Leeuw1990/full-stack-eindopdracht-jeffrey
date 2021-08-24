@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./UserChangeModal.module.css";
 import Button from "../Buttons/Button";
 import axios from "axios";
 import InputField from "../InputField/InputField";
 import { useForm } from "react-hook-form";
+import AdminService from "../../service/AdminService";
 
-function UserChangeModal({
+function AdminChangeModal({
   openModal,
   setOpenModal,
   activeObject,
@@ -18,6 +19,7 @@ function UserChangeModal({
   } = useForm({
     mode: "onChange",
   });
+    const [successMessage, toggleSuccessMessage] = useState(false);
 
   async function userChangeData(updateData) {
     try {
@@ -31,23 +33,13 @@ function UserChangeModal({
           },
         }
       );
-      const response = await axios.get(
-        "http://localhost:8080/api/users/allusers",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      toggleSuccessMessage(true)
+        const response = await AdminService.getUsers()
       setUserData(response.data);
-
-      console.log("change!!!", updateData);
     } catch (e) {
       console.error(e);
     }
   }
-  console.log(activeObject);
 
   return openModal ? (
     <div className={styles.userModal}>
@@ -116,9 +108,14 @@ function UserChangeModal({
           title="Admin Dashboard"
           onclick={() => setOpenModal((prev) => !prev)}
         />
+          {successMessage === true && (
+              <p>
+                  Wijzigen gelukt!
+              </p>
+          )}
       </form>
     </div>
   ) : null;
 }
 
-export default UserChangeModal;
+export default AdminChangeModal;

@@ -21,7 +21,7 @@
   color: #f4ece5;
   align-items: center;
   justify-content: center;
-  box-shadow: 1px 2px 0px 0px black;
+  box-shadow: 1px 1px 0px 0px black;
   font-size: 13px;
 }
 
@@ -57,7 +57,7 @@
 
 .container {
   display: flex;
-  height: 400px;
+  height: 385px;
   width: 315px;
   overflow: auto;
   flex-direction: column;

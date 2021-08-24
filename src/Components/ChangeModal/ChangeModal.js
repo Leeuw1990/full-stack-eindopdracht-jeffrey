@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import styles from "./ChangeModal.module.css";
 import Button from "../Buttons/Button";
 import { AuthContext } from "../../Context/AuthContext";
@@ -7,6 +8,7 @@ import axios from "axios";
 import InputField from "../InputField/InputField";
 
 function ChangeModal({ openChangeModal, setOpenChangeModal }) {
+    const [successMessage, toggleSuccessMessage] = useState(false);
   const {
     handleSubmit,
     register,
@@ -14,6 +16,7 @@ function ChangeModal({ openChangeModal, setOpenChangeModal }) {
   } = useForm({
     mode: "onChange",
   });
+  let history = useHistory();
   const { user } = useContext(AuthContext);
   console.log(user);
 
@@ -29,7 +32,10 @@ function ChangeModal({ openChangeModal, setOpenChangeModal }) {
           },
         }
       );
-
+      toggleSuccessMessage(true);
+        setTimeout(() => {
+            history.push("/");
+        }, 2000);
     } catch (e) {
       console.error(e);
     }
@@ -105,6 +111,11 @@ function ChangeModal({ openChangeModal, setOpenChangeModal }) {
           errors={errors}
         />
         <Button type="submit" name="save" title="Opslaan" />
+          {successMessage === true && (
+              <p>
+                  Wijzigen gelukt! U wordt uitgelogd.
+              </p>
+          )}
       </form>
       <div className={styles.buttonGoBack}>
         <Button

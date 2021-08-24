@@ -1,7 +1,6 @@
 import styles from "./ProductModal.module.css";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import Button from "../Buttons/Button";
 import InputField from "../InputField/InputField";
 import ProductService from "../../service/ProductService";
@@ -24,17 +23,7 @@ function ProductModal({
 
   async function addData(updateData) {
     try {
-      await axios.patch(
-          `${object.uploadedFile.url}`,
-          updateData,
-          {
-            headers: {
-              "access-control-allow-origin": "*",
-              "content-type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-      );
+      await ProductService.patchFiles(object.uploadedFile.url.slice(-55), updateData)
       ProductService.getFiles().then((response) => {
         setUploadedFiles(response.data);
       });

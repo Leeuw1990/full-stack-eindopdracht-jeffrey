@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Admin.module.css";
-import axios from "axios";
-import UserChangeModal from "../../Components/UserChangeModal/UserChangeModal";
+import AdminChangeModal from "../../Components/UserChangeModal/AdminChangeModal";
 import Button from "../../Components/Buttons/Button";
 import { Link } from "react-router-dom";
+import AdminService from "../../service/AdminService";
 
 function Admin() {
   const [userData, setUserData] = useState([]);
@@ -13,15 +13,7 @@ function Admin() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const response = await axios.get(
-          "http://localhost:8080/api/users/allusers",
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
+        const response = await AdminService.getUsers()
         setUserData(response.data);
         console.log("alle gebruikers?", response.data);
       } catch (e) {
@@ -59,7 +51,7 @@ function Admin() {
             })}
         </div>
         {openModal ? (
-          <UserChangeModal
+          <AdminChangeModal
             openModal={openModal}
             setOpenModal={setOpenModal}
             activeObject={activeObject}

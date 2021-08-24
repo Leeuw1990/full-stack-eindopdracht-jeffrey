@@ -139,11 +139,12 @@ function Product() {
             />
             Upload
           </label>
-          <button
-            title="Confirm"
+          <button className={styles.uploadButtonStyle}
             disabled={!selectedFiles}
             onClick={uploadImage}
-          />
+          >Confirm</button>
+          {message === true && (<p>Uploaded!</p>)}
+          {errorMessage === true && (<p>Something went wrong, Try again!</p>)}
         </div>
         <div className={styles.sortButtonsPrice}>
           <p>Price</p>
@@ -175,8 +176,6 @@ function Product() {
             onClick={sortRatingDesc}
           />
         </div>
-        {message && <p>Uploaded!</p>}
-        {errorMessage && <p>Something went wrong, Try again!</p>}
       </div>
     </div>
   );
