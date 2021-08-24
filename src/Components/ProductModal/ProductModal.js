@@ -1,17 +1,16 @@
 import styles from "./ProductModal.module.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Button from "../Buttons/Button";
 import InputField from "../InputField/InputField";
-import UploadService from "../../service/UploadService";
+import ProductService from "../../service/ProductService";
 
 function ProductModal({
   modalClose,
   setModalClose,
   object,
   setUploadedFiles,
-  upLoadedFiles,
 }) {
   const [errorMessage, toggleErrorMessage] = useState(false);
   const [message, toggleMessage] = useState(false);
@@ -25,22 +24,21 @@ function ProductModal({
 
   async function addData(updateData) {
     try {
-      const response = await axios.patch(
-        `${object.uploadedFile.url}`,
-        updateData,
-        {
-          headers: {
-            "access-control-allow-origin": "*",
-            "content-type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
+      await axios.patch(
+          `${object.uploadedFile.url}`,
+          updateData,
+          {
+            headers: {
+              "access-control-allow-origin": "*",
+              "content-type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
       );
-      UploadService.getFiles().then((response) => {
+      ProductService.getFiles().then((response) => {
         setUploadedFiles(response.data);
       });
       toggleMessage(true);
-      console.log("response!!!", response.config.data);
     } catch (e) {
       toggleErrorMessage(true);
     }
@@ -48,14 +46,13 @@ function ProductModal({
 
   return (
     <div>
-      {console.log("wat zit hier in", object)}
       {modalClose ? (
         <form className={styles.popupForm} onSubmit={handleSubmit(addData)}>
           <div className={styles.imageFrame}>
             {object && (
               <img
                 className={styles.image}
-                alt="Image"
+                alt="Product"
                 src={object.uploadedFile.url}
               />
             )}

@@ -1,18 +1,17 @@
 import http from "../http-common";
-import React from "react";
 
 class ProductListService {
-  createProductList(listName) {
-    let data = new data();
-
-    data.append("listName", listName);
-
-    return http.post("api/productlist");
+  postData(data) {
+    return http.post("/api/productlist", data);
   }
 
-  getProductList() {
-    return http.get("api/productlist");
+  getData() {
+    return http.get("/api/productlist");
+  }
+
+  deleteData(listId) {
+    return http.delete(`/api/productlist/${listId}`)
   }
 }
 
-export default ProductListService;
+export default new ProductListService();

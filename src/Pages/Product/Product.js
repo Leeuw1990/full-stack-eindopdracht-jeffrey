@@ -2,8 +2,7 @@ import styles from "./Product.module.css";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../Components/Buttons/Button";
-import ProductUploadService from "../../service/ProductUploadService";
-import UploadService from "../../service/UploadService";
+import ProductUploadService from "../../service/ProductService";
 import ProductModal from "../../Components/ProductModal/ProductModal";
 import { GoTriangleUp, GoTriangleDown } from "react-icons/go";
 
@@ -21,14 +20,9 @@ function Product() {
 
   async function uploadImage() {
     const currentFile = selectedFiles[0];
-
     try {
-      const response = await ProductUploadService.upload(
-        currentFile,
-        (event) => {}
-      );
+      await ProductUploadService.upload(currentFile);
       toggleMessage(true);
-
       const allFiles = await ProductUploadService.getFiles();
       setUploadedFiles(allFiles.data);
     } catch (e) {
@@ -37,7 +31,7 @@ function Product() {
   }
 
   useEffect(() => {
-    UploadService.getFiles().then((response) => {
+    ProductUploadService.getFiles().then((response) => {
       setUploadedFiles(response.data);
     });
   }, []);

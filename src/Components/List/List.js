@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import InputField from "../InputField/InputField";
 import { useForm } from "react-hook-form";
+import ProductListService from "../../service/ProductListService";
 
 function List() {
   const [listsData, setListsdata] = useState([]);
@@ -21,15 +22,7 @@ function List() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get(
-          `http://localhost:8080/api/productlist`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
+        const response = await ProductListService.getData()
         setListsdata(response.data);
       } catch (e) {
         console.error(e);
@@ -41,21 +34,8 @@ function List() {
   async function postData(data) {
     toggleLoading(true);
     try {
-      await axios.post("http://localhost:8080/api/productlist", data, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      const response = await axios.get(
-        "http://localhost:8080/api/productlist",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      await ProductListService.postData(data)
+      const response = await ProductListService.getData()
       setListsdata(response.data);
     } catch (e) {
       console.error(e);
@@ -65,13 +45,7 @@ function List() {
 
   async function deleteData(listId) {
     try {
-      await axios.delete(`http://localhost:8080/api/productlist/${listId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      await ProductListService.deleteData(listId)
       const deleteList = listsData.filter((result) => result.id !== listId);
       setListsdata(deleteList);
     } catch (e) {

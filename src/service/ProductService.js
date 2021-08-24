@@ -1,8 +1,7 @@
-import React from "react";
 import http from "../http-common";
 
-class UploadService {
-  upload(file, onUploadProgress) {
+class ProductService {
+  upload(file) {
     let formData = new FormData();
 
     formData.append("file", file);
@@ -11,13 +10,16 @@ class UploadService {
       headers: {
         "Content-Type": "multipart/form-data",
       },
-      onUploadProgress,
+    });
+  }
+  getFiles() {
+    return http.get("/api/product/files", {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     });
   }
 
-  getFiles() {
-    return http.get("/api/product/files");
-  }
 }
 
-export default new UploadService();
+export default new ProductService();

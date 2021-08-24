@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { Link, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Profile from "./Pages/Profile/Profile";
 import SignUp from "./Pages/SignUp/SignUp";
 import SignIn from "./Pages/SignIn/SignIn";
@@ -13,20 +13,6 @@ import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 function App() {
   return (
     <div>
-      {/*<nav>*/}
-      {/*  <ul>*/}
-      {/*    <li>*/}
-      {/*      <Link to="/profile">Profile</Link>*/}
-      {/*    </li>*/}
-      {/*    <li>*/}
-      {/*      <Link to="/list">lists</Link>*/}
-      {/*    </li>*/}
-      {/*    <li>*/}
-      {/*      <Link to="/admin">admin</Link>*/}
-      {/*    </li>*/}
-      {/*  </ul>*/}
-      {/*</nav>*/}
-
       <Switch>
         <Route exact path="/">
           <SignIn />
