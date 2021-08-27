@@ -34,7 +34,7 @@ function ProductModal({
   }
 
   return (
-    <div>
+    <div className={styles.modal}>
       {modalClose ? (
         <form className={styles.popupForm} onSubmit={handleSubmit(addData)}>
           <div className={styles.imageFrame}>

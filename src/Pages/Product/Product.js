@@ -79,7 +79,7 @@ function Product() {
   return (
     <div className={styles.overAllSize}>
       <div className={styles.productForm}>
-        <div className={styles.modalPosition}>
+        <div>
           <div className={styles.container}>
             {uploadedFiles.length > 0 &&
               uploadedFiles.map((uploadedFile, index) => {
@@ -115,18 +115,17 @@ function Product() {
                 );
               })}
           </div>
-          {modalClose ? (
-            <ProductModal
-              oneImage={activeObject}
-              object={activeObject}
-              modalClose={modalClose}
-              setModalClose={setModalClose}
-              setUploadedFiles={setUploadedFiles}
-              upLoadedFiles={uploadedFiles}
-            />
-          ) : null}
         </div>
-
+        {modalClose ? (
+            <ProductModal
+                oneImage={activeObject}
+                object={activeObject}
+                modalClose={modalClose}
+                setModalClose={setModalClose}
+                setUploadedFiles={setUploadedFiles}
+                upLoadedFiles={uploadedFiles}
+            />
+        ) : null}
         <div className={styles.buttons}>
           <Link to="/productlist">
             <Button type="button" name="toList" title="My lists" />

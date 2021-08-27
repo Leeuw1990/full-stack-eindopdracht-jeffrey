@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./UserChangeModal.module.css";
+import styles from "./AdminChangeModal.module.css";
 import Button from "../Buttons/Button";
 import axios from "axios";
 import InputField from "../InputField/InputField";

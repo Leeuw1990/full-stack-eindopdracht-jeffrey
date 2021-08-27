@@ -15,7 +15,6 @@ function Admin() {
       try {
         const response = await AdminService.getUsers()
         setUserData(response.data);
-        console.log("alle gebruikers?", response.data);
       } catch (e) {
         console.error(e);
       }
