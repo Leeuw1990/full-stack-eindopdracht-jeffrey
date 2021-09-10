@@ -12,7 +12,7 @@ function AuthContextProvider({ children }) {
   });
 
   useEffect(() => {
-    const token = localStorage.getItem("JWT_token");
+    const token = localStorage.getItem("token");
     if (token !== null && authState.user === null) {
       loginFunction(token);
     } else {

@@ -118,3 +118,10 @@ ul {
   position: relative;
   top: 50px;
 }
+
+.deleteB {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  color: hsl(222, 100%, 16%);
+}

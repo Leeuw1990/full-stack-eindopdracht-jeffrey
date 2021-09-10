@@ -5,12 +5,15 @@ import Button from "../../Components/Buttons/Button";
 import ProductUploadService from "../../service/ProductService";
 import ProductModal from "../../Components/ProductModal/ProductModal";
 import { GoTriangleUp, GoTriangleDown } from "react-icons/go";
+import { RiDeleteBin5Fill } from "react-icons/ri"
+import ProductService from "../../service/ProductService";
 
 function Product() {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState(undefined);
   const [errorMessage, toggleErrorMessage] = useState(false);
   const [message, toggleMessage] = useState(false);
+  const [deleteMessage, toggleDeleteMessage] = useState(false);
   const [modalClose, setModalClose] = useState(false);
   const [activeObject, setActiveObject] = useState(null);
 
@@ -28,7 +31,24 @@ function Product() {
     } catch (e) {
       toggleErrorMessage(true);
     }
+    setTimeout(() => {toggleMessage(false)}, 2000)
   }
+
+  async function deleteData(productId) {
+
+    try {
+      await ProductService.deleteFiles(productId)
+      const files = await ProductUploadService.getFiles();
+      setUploadedFiles(files.data)
+      toggleDeleteMessage(true);
+    } catch (e) {
+      console.error(e)
+    }
+    setTimeout(() => {toggleDeleteMessage(false)}, 2000)
+  }
+
+  // const deleteList = listsData.filter((result) => result.id !== listId);
+  // setListsdata(deleteList);
 
   useEffect(() => {
     ProductUploadService.getFiles().then((response) => {
@@ -110,6 +130,7 @@ function Product() {
                           <li>Opmerkingen: {uploadedFile.comment}</li>
                         )}
                       </ul>
+                      <RiDeleteBin5Fill className={styles.deleteB} onClick={()=>{deleteData(uploadedFile.url)}}/>
                     </div>
                   </div>
                 );
@@ -143,6 +164,7 @@ function Product() {
             onClick={uploadImage}
           >Confirm</button>
           {message === true && (<p>Uploaded!</p>)}
+          {deleteMessage === true && (<p>Deleted!</p>)}
           {errorMessage === true && (<p>Something went wrong, Try again!</p>)}
         </div>
         <div className={styles.sortButtonsPrice}>

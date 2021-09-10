@@ -24,6 +24,10 @@ class ProductService {
     return http.patch(`${object}`, data)
   }
 
+  deleteFiles(id) {
+    return http.delete(`${id}`)
+  }
+
 }
 
 export default new ProductService();

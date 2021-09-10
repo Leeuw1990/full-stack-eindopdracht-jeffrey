@@ -31,6 +31,7 @@ function ProductModal({
     } catch (e) {
       toggleErrorMessage(true);
     }
+    setTimeout(() => {toggleMessage(false)}, 2000)
   }
 
   return (
