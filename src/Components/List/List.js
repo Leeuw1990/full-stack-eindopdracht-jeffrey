@@ -44,23 +44,32 @@ function List() {
 
   async function deleteData(listId) {
     try {
-      await ProductListService.deleteData(listId)
-      const deleteList = listsData.filter((result) => result.id !== listId);
-      setListsdata(deleteList);
+        await ProductListService.deleteData(listId)
+      const response = await ProductListService.getData()
+      setListsdata(response.data);
     } catch (e) {
       console.error(e);
     }
   }
+
+  // async function deleteData(listId) {
+  //   try {
+  //     await ProductListService.deleteData(listId)
+  //     const deleteList = listsData.filter((result) => result.id !== listId);
+  //     setListsdata(deleteList);
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }
 
   return (
     <div className={styles.container}>
       <div className={styles.infiniteScroll}>
         {listsData.length > 0 &&
           listsData.map((name, index) => (
-            <div key={index}>
+            <div className={styles.positionList} key={index}>
               <div className={styles.icon}>
                 <div
-                  className={styles.listText}
                   key={index}
                   onClick={() => history.push(`/product/${name.id}`)}
                 >
@@ -73,7 +82,6 @@ function List() {
             </div>
           ))}
       </div>
-      <div>
         <form onSubmit={handleSubmit(postData)}>
           <InputField
             type="text"
@@ -97,9 +105,12 @@ function List() {
           </button>
           {loading === true && <p>Lijst toegevoegd!</p>}
         </form>
-      </div>
     </div>
   );
 }
 
 export default List;
+
+// <div onClick={() => deleteData(name.id)} className="deleteIcon">
+//   Remove
+// </div>

@@ -11,32 +11,21 @@ function AuthContextProvider({ children }) {
     status: "pending",
   });
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token !== null && authState.user === null) {
-      loginFunction(token);
-    } else {
-      setAuthState({
-        user: null,
-        status: "done",
-      });
-    }
-  }, []);
-
-  async function loginFunction(jwtToken) {
+  async function fetchUser(jwtToken) {
     const decoded = jwt_decode(jwtToken);
+    console.log(jwtToken)
     const userId = decoded.sub;
     localStorage.setItem("token", jwtToken);
 
     try {
       const result = await axios.get(
-        `http://localhost:8080/api/users/user/${userId}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${jwtToken}`,
-          },
-        }
+          `http://localhost:8080/api/users/user/${userId}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${jwtToken}`,
+            },
+          }
       );
       console.log(result, "authcontxt");
 
@@ -53,17 +42,34 @@ function AuthContextProvider({ children }) {
         },
         status: "done",
       });
-      history.push("/profile");
     } catch (e) {
       console.error(e);
     }
   }
 
-  const data = {
-    ...authState,
-    login: loginFunction,
-    logout: logOutFunction,
-  };
+  useEffect(() => {
+    let mounted = true;
+    const token = localStorage.getItem('token')
+    if (token !== null && authState.user === null) {
+      if (mounted) {
+        fetchUser(token);
+      }
+    } else {
+      setAuthState({
+        user: null,
+        status: "done"
+      });
+    }
+    return () => (mounted = false);
+  }, []);
+
+
+
+  async function loginFunction(jwt) {
+    localStorage.setItem('token', jwt);
+    await fetchUser(jwt);
+    history.push('/profile');
+  }
 
   function logOutFunction() {
     localStorage.clear();
@@ -73,6 +79,12 @@ function AuthContextProvider({ children }) {
     });
     history.push("/");
   }
+
+  const data = {
+    ...authState,
+    login: loginFunction,
+    logout: logOutFunction,
+  };
 
   return (
     <AuthContext.Provider value={data}>

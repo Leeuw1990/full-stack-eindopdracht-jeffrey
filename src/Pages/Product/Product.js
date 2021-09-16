@@ -17,6 +17,7 @@ function Product() {
   const [modalClose, setModalClose] = useState(false);
   const [activeObject, setActiveObject] = useState(null);
 
+
   function selectFile(event) {
     setSelectedFiles(event.target.files);
   }
